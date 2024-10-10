@@ -1,0 +1,1082 @@
+id,word,translation
+1,die Leute,люди
+2,der Mensch,человек
+3,der Mann,мужчина; муж
+4,die Frau,женщина; жена
+5,das Kind,ребенок
+6,der Junge,мальчик
+7,das Mädchen,девочка
+8,der Freund,друг
+9,der Bekannte,знакомый
+10,der Nachbar,сосед
+11,der Gast,гость
+12,der Chef,начальник; шеф
+13,der Konkurrent,конкурент
+14,der Kunde,"клиент, покупатель"
+15,der Kollege,коллега
+16,die Familie,семья
+17,die Eltern,родители
+18,der Vater,отец
+19,der Vati,папа
+20,die Mutter,мать
+21,die Mutti,мама
+22,der Sohn,сын
+23,die Tochter,дочь
+24,der Bruder,брат
+25,die Schwester,сестра
+26,der Großvater,дед
+27,der Opa,дедушка
+28,die Großmutter,бабушка
+29,die Oma,бабуля
+30,der Enkel,внук
+31,die Enkelin,внучка
+32,der Schwiegervater,"тесть, свекор"
+33,die Schwiegermutter,"тёща, свекровь"
+34,der Onkel,дядя
+35,die Tante,тетя
+36,der Cousin [кузэн],двоюродный брат
+37,die Kusine,двоюродная сестра
+38,der Neffe,племянник
+39,die Nichte,племянница
+40,die Arbeit,работа
+41,der Geschäftsmann,бизнесмен
+42,der Lehrer,учитель
+43,der Fahrer,водитель
+44,der Arbeiter,рабочий
+45,der Ingenieur,инженер
+46,der Arzt,врач
+47,der Rechtsanwalt,адвокат
+48,der Journalist,журналист
+49,die Krankenschwester,медсестра
+50,der Verkäufer,продавец
+51,der Kellner,официант
+52,der Buchhalter,бухгалтер
+53,der Maler,художник
+54,der Musiker,музыкант
+55,der Schauspieler,актер
+56,der Student,студент
+57,der Schüler,"школьник, ученик"
+58,das Tier,животное
+59,die Katze,кошка
+60,der Hund,собака
+61,der Vogel,птица
+62,das Eichhörnchen,белка
+63,der Wolf,волк
+64,die Gans,гусь
+65,die Giraffe,жираф
+66,das Kaninchen,кролик
+67,der Hase,заяц
+68,die Kuh,корова
+69,die Ratte,крыса
+70,der Fuchs,лиса
+71,das Pferd,лошадь
+72,der Frosch,лягушка
+73,der Bär,медведь
+74,die Maus,мышь
+75,der Affe,обезьяна
+76,das Schwein,свинья
+77,der Elefant,слон
+78,die Ente,утка
+79,das Land,страна; сельская местность; земля
+80,Russland,Россия 
+81,Deutschland,Германия
+82,Österreich,Австрия
+83,die Schweiz,Швейцария
+84,die Stadt,город
+85,das Haus,дом
+86,das Gebäude,здание
+87,der Platz,площадь; место
+88,der Eingang,вход
+89,der Ausgang,выход
+90,das Zentrum,центр
+91,der Hof,двор
+92,das Dach,крыша
+93,der Zaun,забор
+94,das Dorf,"деревня, поселок"
+95,die Schule,школа
+96,die Universität,университет
+97,das Theater,театр
+98,die Kirche,церковь
+99,das Restaurant,ресторан
+100,das Cafe,кафе
+101,das Hotel,гостиница
+102,die Bank,банк
+103,das Kino,кинотеатр
+104,das Krankenhaus,больница
+105,die Polizei,полиция
+106,das Postamt,почта
+107,der Bahnhof,"станция, вокзал"
+108,der Flughafen,аэропорт
+109,das Geschäft,магазин
+110,die Apotheke,аптека
+111,der Markt,рынок
+112,das Büro,офис
+113,die Firma,фирма
+114,der Betrieb,предприятие
+115,die Straße,улица
+116,der Weg,дорога
+117,die Kreuzung,перекрёсток
+118,die Haltestelle,остановка
+119,der Gehsteig,тротуар
+120,der Pfad,"тропа, тропинка"
+121,der Garten,сад
+122,der Park,парк
+123,die Brücke,мост
+124,der Fluss,река
+125,der Wald,лес
+126,das Feld,поле
+127,der Berg,гора
+128,der See,озеро
+129,das Meer,море
+130,der Ozean,океан
+131,die Küste,"морской берег, побережье"
+132,der Strand,пляж
+133,der Sand,песок
+134,die Insel,остров
+135,die Grenze,граница
+136,der Zoll,таможня
+137,der Müll,мусор
+138,die Abfälle,отходы
+139,der Stein,камень
+140,die Pflanze,растение
+141,der Baum,дерево
+142,das Gras,трава
+143,die Blume,цветок
+144,das Blatt,лист
+145,die Wohnung,квартира
+146,das Zimmer,комната
+147,das Wohnzimmer,зал
+148,das Schlafzimmer,спальня
+149,das Badezimmer,ванная
+150,die Dusche,душ
+151,die Toilette,туалет
+152,die Küche,кухня
+153,der Flur,коридор
+154,der Balkon,балкон
+155,der Fußboden,пол
+156,die Decke,потолок; одеяло
+157,die Wand,стена
+158,die Treppe,лестница
+159,die Tür,дверь
+160,das Fenster,окно
+161,das Fensterbrett,подоконник
+162,die Gardine,"занавес(ка), штора"
+163,der Schalter,выключатель; окошко (кассы)
+164,die Steckdose,розетка
+165,der Wasserhahn,(водопроводный) кран
+166,das Rohr,труба
+167,der Schornstein,дымовая труба
+168,die Möbel,мебель
+169,der Tisch,стол
+170,der Stuhl,стул
+171,der Sessel,кресло
+172,die Couch [кáуч],диван
+173,das Bett,кровать
+174,der Schrank,шкаф
+175,das Regal,полка
+176,der Spiegel,зеркало
+177,der Teppich,ковер
+178,der Kühlschrank,холодильник
+179,die Mikrowelle,микроволновка
+180,der Ofen,"печь, духовка"
+181,der Herd,кухонная плита
+182,die Lebensmittel,"еда, продукты"
+183,das Brot,хлеб
+184,die Butter,сливочное масло
+185,das Öl,растительное масло
+186,der Käse,сыр
+187,die Wurst,колбаса
+188,das Würstchen,сосиска
+189,der Schinken,ветчина
+190,das Fleisch,мясо
+191,das Rindfleisch,говядина
+192,das Schweinefleisch,свинина
+193,das Lammfleisch,баранина
+194,das Hähnchen,курица (мясо)
+195,das Kotelett,"котлета, отбивная"
+196,der Fisch,рыба
+197,das Ei,яйцо
+198,der Salat,салат
+199,der Pilz,грибы
+200,der Mais,кукуруза
+201,der Brei,каша
+202,die Haferflocken,овсянка
+203,die Suppe,суп 
+204,das belegte Brötchen,бутерброд
+205,der Reis,рис
+206,die Nudeln,лапша
+207,das Mehl,мука
+208,das Gewürz,"специя, пряность"
+209,der Pfeffer,перец
+210,das Salz,соль
+211,die Zwiebel,лук (репчатый)
+212,der Knoblauch,чеснок
+213,die Soße,соус
+214,das Gemüse,овощи
+215,die Kartoffeln,картофель
+216,die Mohrrübe,морковь
+217,die Zuckerrübe,свекла
+218,die Tomate,помидор
+219,die Gurke,огурец
+220,der Kohl,капуста
+221,die Zucchini [цукини],кабачок
+222,die Aubergine [обэр'жинэ],баклажан
+223,die Bohnen,бобы
+224,die Erbsen,горох
+225,die Nuss,орех
+226,das Obst,фрукты
+227,der Apfel,яблоко
+228,die Birne,груша
+229,die Banane,банан
+230,die Beere,ягода
+231,die Erdbeere,"клубника, земляника"
+232,die Himbeere,малина
+233,die Kirsche,вишня
+234,die Pflaume,слива
+235,die Trauben,виноград
+236,die Aprikose,абрикос
+237,der Pfirsich,персик
+238,die Melone,дыня
+239,die Wassermelone,арбуз
+240,der Kürbis,тыква
+241,die Orange [орáнжэ],апельсин
+242,die Mandarine,мандарин
+243,die Zitrone,лимон
+244,die Ananas,ананас
+245,der Zucker,сахар
+246,der Honig,мёд 
+247,die Marmelade,варенье
+248,der Kuchen,"торт, пирог"
+249,das Brötchen,булочка
+250,das Gebäck,печенье
+251,die Süßigkeiten,"конфеты, сладости"
+252,das Eis,мороженое; лёд
+253,die Schokolade,шоколад
+254,das Wasser,вода
+255,das Sodawasser,газировка
+256,der Saft,сок
+257,der Wein,вино
+258,der Tee,чай
+259,der Kaffee,кофе
+260,die Milch,молоко
+261,die Sahne,сливки
+262,der Joghurt,йогурт
+263,der Quark,творог
+264,das Geschirr,посуда
+265,die Tasse,чашка
+266,das Glas,стакан; стекло
+267,der Becher,кружка
+268,der Teller,тарелка
+269,der Löffel,ложка
+270,die Gabel,вилка
+271,das Messer,нож
+272,die Untertasse,блюдце
+273,die Flasche,бутылка
+274,die Serviette,салфетка
+275,der Topf,кастрюля; горшок
+276,die Pfanne,сковородка 
+277,der Kessel,чайник; котел
+278,die Mahlzeit,"принятие пищи, еда"
+279,das Frühstück,завтрак
+280,das Mittagessen,обед
+281,das Abendessen,ужин
+282,der Transport,транспорт
+283,das Flugzeug,самолет
+284,das Auto,автомобиль
+285,die Straßenbahn,трамвай
+286,der Bus,автобус
+287,der Zug,поезд
+288,das Schiff,корабль
+289,das Fahrrad,велосипед
+290,die Zeit,время
+291,die Minute,минута
+292,die Stunde,час
+293,die Woche,неделя
+294,das Jahr,год
+295,das Jahrhundert,"век, столетие"
+296,das Mal,раз
+297,vorgestern,позавчера
+298,gestern,вчера
+299,heute,сегодня
+300,morgen,завтра
+301,übermorgen,послезавтра
+302,der Tag,день
+303,der Morgen,утро 
+304,der Vormittag,время до полудня
+305,der Nachmittag,время после полудня
+306,der Abend,вечер
+307,die Nacht,ночь
+308,der Montag,понедельник
+309,der Dienstag,вторник
+310,der Mittwoch,среда
+311,der Donnerstag,четверг
+312,der Freitag,пятница
+313,der Samstag,суббота
+314,der Sonntag,воскресенье
+315,der Monat,месяц
+316,der Januar,январь
+317,der Februar,февраль
+318,der März,март
+319,der April,апрель
+320,der Mai,май
+321,der Juni,июнь
+322,der Juli,июль
+323,der August,август
+324,der September,сентябрь
+325,der Oktober,октябрь
+326,der November,ноябрь
+327,der Dezember,декабрь
+328,die Jahreszeit,время года
+329,der Frühling,весна
+330,der Sommer,лето
+331,der Herbst,осень
+332,der Winter,зима
+333,das Fest,праздник
+334,das Weihnachten,Рождество
+335,das Ostern,Пасха
+336,der Geburtstag,день рождения
+337,das Formular,"формуляр, бланк"
+338,der Name,"имя, фамилия; название"
+339,der Vorname,имя
+340,der Familienname,фамилия
+341,der Mädchenname,девичья фамилия
+342,das Geburtsdatum,дата рождения
+343,der Geburtsort,место рождения
+344,die Adresse,адрес
+345,der Familienstand,семейное положение
+346,ledig,"холостой, незамужняя"
+347,verheiratet,женатый / замужняя
+348,geschieden,разведенный
+349,verwitwet,овдовевший
+350,die Sache,вещь
+351,der Kugelschreiber,ручка
+352,der Bleistift,карандаш
+353,das Buch,книга
+354,das Heft,тетрадь
+355,das Notizbuch,блокнот
+356,die Notiz,"пометка, запись"
+357,das Wörterbuch,словарь
+358,der Buchstabe,буква
+359,der Brief,письмо
+360,der Umschlag,конверт
+361,das Papier,бумага
+362,die Zeitung,газета
+363,die Zeitschrift,журнал
+364,das Telefon,телефон
+365,das Handy [хэнди],сотовый телефон
+366,die Uhr,часы
+367,der Kamm,расчёска
+368,der Fernseher,телевизор
+369,das Bügeleisen,утюг
+370,die Seife,мыло
+371,das Radio,радио
+372,die Tasche,сумка
+373,der Rucksack,рюкзак
+374,die Karte,карта
+375,die Postkarte,открытка
+376,der Koffer,чемодан
+377,das Geschenk,подарок
+378,die Kamera,камера
+379,der Fotoapparat,фотоаппарат
+380,die Vase,ваза
+381,das Taschentuch,носовой платок
+382,der Ball,мяч
+383,der Luftballon,воздушный шар(ик)
+384,das Spielzeug,игрушка
+385,die Fahrkarte,билет (на поезд)
+386,der Fahrschein,билет (на городской транспорт)
+387,das Ticket,билет (на самолёт)
+388,das Gepäck,багаж
+389,die Batterie,"батарейка, аккумулятор"
+390,der Eimer,ведро
+391,die Leine,веревка 
+392,die Tafel,"доска (школьная), плитка (шоколада)"
+393,das Brett,"доска, брусок"
+394,der Kalender,календарь
+395,der Laptop [лэптоп],ноутбук 
+396,die Bürste,щетка
+397,die Pinsel,"кисть, кисточка"
+398,die Tastatur,клавиатура 
+399,die Taste,клавиша
+400,der Schlüssel,ключ
+401,das Rad,колесо
+402,das Lenkrad,руль
+403,der Kofferraum,багажник
+404,das Benzin,бензин
+405,die Geldbörse,кошелек
+406,die Brieftasche,бумажник
+407,die Lampe,лампа
+408,das Lineal,линейка
+409,die Schaufel,лопата
+410,die Maschine,машина; механизм
+411,der Hammer,молоток
+412,die Schere,ножницы
+413,die Brille,очки
+414,das Paket,посылка
+415,der Stock,палка
+416,der Klebstoff,клей
+417,das Handtuch,полотенце
+418,der Draht,проволока
+419,das Kabel,"провод, кабель"
+420,die Seite,страница
+421,die Taschenlampe,карманный фонарь
+422,der Kasten,ящик
+423,die Kiste,коробка
+424,das Laken,простыня
+425,das Kissen,подушка
+426,die Kleidung,одежда
+427,die Schuhe,"обувь, туфли"
+428,die Stiefel,сапоги
+429,die Turnschuhe,кроссовки
+430,der Mantel,пальто
+431,das Kleid,платье
+432,der Anzug,костюм
+433,das Hemd,рубашка
+434,die Bluse,блузка
+435,der Rock,юбка
+436,die Handschuhe,перчатки
+437,die Fäustlinge,варежки
+438,der Hut,шляпа
+439,die Mütze,шапка; кепка
+440,die Jacke,Куртка
+441,die Strickjacke,кофта
+442,das Sakko,пиджак
+443,der Schal,шарф
+444,die Socke,носок
+445,der Pullover,свитер
+446,das T-Shirt [тишёрт],футболка
+447,die Krawatte,галстук
+448,die Hose,"брюки, штаны"
+449,die Shorts [шортс],шорты
+450,die Strumpfhose,колготки
+451,die Strümpfe,чулки
+452,die Jeans [джинз],джинсы
+453,die Kapuze,капюшон
+454,der Gürtel,ремень
+455,die Unterwäsche,нижнее белье 
+456,die Unterhose,трусы
+457,der Büstenhaĺter,бюстгальтер
+458,der Körper,тело
+459,der Kopf,голова
+460,das Gesicht,лицо
+461,die Stirn,лоб
+462,die Nase,нос
+463,das Ohr,ухо
+464,der Mund,рот
+465,der Hals,горло; шея
+466,das Auge,глаз
+467,die Augenbraue,бровь
+468,die Lippen,губы
+469,der Zahn,зуб
+470,das Haar,волос(ы)
+471,der Schnurrbart,усы 
+472,der Bart,борода
+473,die Wange,щека
+474,das Kinn,подбородок
+475,die Schulter,плечо
+476,die Brust,грудь
+477,das Herz,сердце
+478,der Bauch,живот
+479,der Rücken,спина
+480,das Handgelenk,запястье
+481,die Hand,"рука, кисть (руки)"
+482,der Arm,рука (вся) 
+483,der Finger,палец (руки)
+484,der Nagel,ноготь; гвоздь
+485,der Ellenbogen,локоть
+486,das Bein,нога
+487,das Knie,колено
+488,der Fuß,"нога, ступня; подножие"
+489,die Ferse,пятка
+490,die Zehe,палец (ноги)
+491,der Knochen,кость
+492,die Gesundheit,здоровье
+493,gesund,здоровый
+494,krank,больной
+495,die Krankheit,болезнь
+496,das Fieber,"жар, (высокая) температура"
+497,der Husten,кашель
+498,der Schnupfen,насморк
+499,niesen,чихать
+500,der Schmerz,боль
+501,die Kopfschmerzen,головная боль
+502,weh tun,болеть
+503,die Grippe,грипп 
+504,die Erkältung,простуда
+505,die Prellung,"синяк, ушиб"
+506,das Ereignis,событие
+507,die Geburt,рождение
+508,das Spiel,игра
+509,der Unterricht,"занятие (урок), занятия"
+510,der Urlaub,отпуск
+511,die Ferien,каникулы
+512,die Party [пати],вечеринка
+513,das Treffen,встреча
+514,die Versammlung,собрание
+515,die Hochzeit,свадьба
+516,die Verhandlungen,переговоры
+517,die Reise,"поездка, путешествие"
+518,der Tod,смерть
+519,das Wetter,погода
+520,die Sonne,солнце
+521,der Mond,луна
+522,der Wind,ветер
+523,der Nebel,туман
+524,der Regen,дождь
+525,der Schnee,снег
+526,der Himmel,небо
+527,die Wolke,облако
+528,die Luft,воздух
+529,die Temperatur,температура
+530,der Grad,градус
+531,die Kunst,искусство
+532,die Musik,музыка
+533,das Lied,песня
+534,die Literatur,литература
+535,die Geschichte,"рассказ, история"
+536,der Film,фильм; пленка
+537,die Skulptur,скульптура
+538,das Bild,картина
+539,das Foto,фото
+540,die Werbung,реклама
+541,die Einkäufe,покупки
+542,die Größe,размер
+543,der Preis,цена
+544,das Geld,деньги
+545,das Bargeld,наличные (деньги)
+546,der Rabatt,скидка
+547,das Konto,счет (банковский)
+548,die Rechnung,счёт (для оплаты)
+549,das Trinkgeld,чаевые
+550,das Messen,измерение
+551,die Entfernung,расстояние
+552,die Distanz,дистанция
+553,die Länge,длина
+554,die Höhe,высота
+555,die Tiefe,глубина
+556,die Stärke,сила
+557,die Geschwindigkeit,скорость
+558,der Kilometer,километр
+559,das Kilogramm,килограмм
+560,das Pfund,фунт
+561,das Gefühl,чувство
+562,der Spaß,веселье
+563,die Freude,радость
+564,die Angst,страх
+565,die Traurigkeit,печаль
+566,die Leidenschaft,"страсть, страстность"
+567,das Vergnügen,удовольствие
+568,das Glück,счастье
+569,der Frieden,мир (покой)
+570,lieben,любить
+571,hassen,ненавидеть
+572,die Welt,мир (планета)
+573,die Seele,душа
+574,das Leben,жизнь
+575,das Wissen,знание
+576,die Aufgabe,"задача, задание"
+577,die Übung,упражнение
+578,das Problem,проблема
+579,die Gelegenheit,(благоприятная) возможность
+580,die Fähigkeit,способность
+581,die Schönheit,красота
+582,die Gefahr,опасность
+583,die Erfahrung,опыт
+584,das Gedächtnis,память
+585,die Erinnerung,воспоминание
+586,der Nutzen,польза
+587,der Vorteil,преимущество
+588,der Gewinn,"выигрыш; прибыль, доход"
+589,die Gewohnheit,привычка
+590,der Grund,"причина; грунт, земля"
+591,die Konsequenz,(по)следствие
+592,die Bedeutung,значение
+593,das Mittel,средство
+594,die Anstrengung,усилие
+595,der Erfolg,успех
+596,das Ziel,цель
+597,das Wunder,чудо
+598,die Wissenschaft,наука
+599,die Sprache,язык
+600,das Wort,слово
+601,das Feuer,огонь
+602,der Fall,случай; дело; падение
+603,der Umstand,обстоятельство
+604,der Gedanke,мысль
+605,die Wahl,выбор 
+606,die Erlaubnis,разрешение
+607,die Lieferung,доставка; поставка
+608,die Leistung,"достижение, успех"
+609,die Pflicht,обязанность
+610,die Verzögerung,"задержка, промедление"
+611,die Beziehung,отношение
+612,die Note,"оценка, отметка, знак; нота"
+613,der Fehler,ошибка
+614,das Benehmen,поведение
+615,die Einladung,приглашение
+616,die Entwicklung,развитие
+617,die Entscheidung,"решение, принятие решения"
+618,die Lösung,решение (проблемы)
+619,der Rat,совет
+620,die Vereinbarung,соглашение; согласие
+621,der Vertrag,договор
+622,die Liste,список
+623,der Streit,спор
+624,der Test,"тест, испытание"
+625,die Prüfung,экзамен
+626,der Schritt,шаг
+627,das Stück,кусок; штука
+628,der Bereich,"область, сфера"
+629,das Paar,пара
+630,die Oberfläche,поверхность
+631,die Ordnung,порядок
+632,die Frage,вопрос
+633,was,что
+634,wer,кто
+635,wo,где
+636,wohin,куда 
+637,woher,откуда
+638,wie,как 
+639,welcher,какой
+640,warum,почему
+641,wozu,зачем
+642,wenn,когда; если
+643,wie viel (wie viele),сколько
+644,ich,я 
+645,du,ты
+646,er,он
+647,sie,она
+648,es,оно
+649,wir,мы 
+650,ihr,вы
+651,sie,они 
+652,Sie,Вы
+653,mein,мой
+654,dein,твой
+655,sein,его
+656,ihr,её; их
+657,unser,наш 
+658,euer,ваш
+659,Ihr,Ваш
+660,aus,из
+661,von,от; передает род. падеж; с (такого-то времени)
+662,seit,с (такого-то времени и поныне)
+663,zu,к; слишком
+664,in,в; через (такое-то время)
+665,auf,на
+666,unter,под
+667,hinter,позади
+668,mit,с
+669,ohne,без
+670,vor,"перед, до; (столько-то времени) назад"
+671,nach,после; в (такой-то город или страну)
+672,zwischen,между
+673,neben,"возле, около"
+674,für,для; на (такое-то время)
+675,während,во время
+676,um,вокруг
+677,wegen,из-за
+678,über,над; о; свыше
+679,gegen,против
+680,unter,под; среди
+681,durch,через 
+682,pro,(километров) в (час)
+683,die Zahl,"число, цифра; количество"
+684,"null ",ноль
+685,eins,один
+686,zwei,два
+687,drei,три
+688,vier,четыре
+689,fünf,пять
+690,sechs,шесть
+691,sieben,семь
+692,acht,восемь
+693,neun,девять
+694,zehn,десять
+695,elf,одиннадцать
+696,zwölf,двенадцать
+697,dreizehn,тринадцать
+698,vierzehn,четырнадцать
+699,fünfzehn,пятнадцать
+700,sechzehn,шестнадцать
+701,siebzehn,семнадцать
+702,achtzehn,восемнадцать
+703,neunzehn,девятнадцать
+704,zwanzig,двадцать
+705,dreißig,тридцать
+706,vierzig,сорок
+707,fünfzig,пятьдесят
+708,sechzig,шестьдесят
+709,siebzig,семьдесят
+710,achtzig,восемьдесят
+711,neunzig,девяносто
+712,hundert,сто
+713,tausend,тысяча
+714,der erste,первый
+715,der zweite,второй
+716,der dritte,третий
+717,der vierte,четвертый
+718,die Farbe,"цвет, краска"
+719,schwarz,чёрный
+720,blau,голубой; синий
+721,braun,коричневый
+722,grün,зелёный
+723,grau,серый
+724,rot,красный
+725,weiß,белый
+726,gelb,желтый
+727,rosa,розовый
+728,violett,фиолетовый
+729,alt,старый
+730,jung,молодой
+731,neu,новый
+732,groß,большой
+733,riesig,огромный
+734,klein,маленький
+735,dick,толстый; густой
+736,dünn,тонкий
+737,hungrig,голодный 
+738,satt,сытый
+739,voll,полный 
+740,leer,пустой
+741,gut,хороший; добрый
+742,ausgezeichnet,отличный
+743,erstaunlich,удивительный
+744,wunderschön,"прекрасный, чудесный"
+745,schlecht,плохой
+746,schrecklich,ужасный
+747,früh,ранний; рано
+748,spät,поздний; поздно
+749,letzt,"последний, прошлый"
+750,nächst,следующий
+751,frei,свободный
+752,kostenlos,бесплатный
+753,beschäftigt,занятый
+754,heiß,жаркий; горячий
+755,warm,тёплый
+756,kalt,холодный
+757,kühl,прохладный
+758,scharf,острый
+759,stumpf,тупой (нож)
+760,dumm,глупый
+761,klug,умный
+762,schön,красивый
+763,attraktiv,привлекательный
+764,hübsch,симпатичный
+765,hässlich,"уродливый, безобразный, отвратительный"
+766,hoch,высокий
+767,niedrig,низкий
+768,lang,длинный; долгий 
+769,kurz,короткий
+770,schwer,тяжёлый 
+771,leicht,лёгкий
+772,schwierig,"трудный, тяжелый"
+773,einfach,простой
+774,dunkel,тёмный 
+775,hell,светлый
+776,teuer,дорогой (о цене) 
+777,lieb,"дорогой, милый"
+778,billig,дешёвый 
+779,arm,бедный
+780,reich,богатый
+781,gerade,прямой; прямо
+782,links,cлева
+783,rechts,справа
+784,falsch,неправильный
+785,schnell,быстрый
+786,langsam,медленный
+787,weich,мягкий
+788,hart,твёрдый; жесткий; трудный
+789,traurig,печальный
+790,froh,радостный
+791,glücklich,счастливый
+792,lustig,веселый
+793,böse,"сердитый, злой"
+794,höflich,вежливый
+795,grob,грубый
+796,zart,нежный
+797,mutig,смелый
+798,feige,трусливый
+799,scheu,застенчивый
+800,fleißig,прилежный
+801,faul,ленивый
+802,nützlich,полезный
+803,nutzlos,бесполезный
+804,stark,сильный; крепкий
+805,schwach,слабый
+806,laut,"громкий, шумный"
+807,leise,"тихий, негромкий"
+808,ruhig,"тихий, спокойный"
+809,eng,узкий
+810,breit,широкий
+811,sauber,чистый
+812,schmutzig,грязный
+813,müde,усталый
+814,ehrlich,честный
+815,bequem,уютный
+816,seltsam,странный
+817,eigen,собственный
+818,schmackhaft,вкусный
+819,bitter,горький
+820,sauer,кислый
+821,salzig,соленый
+822,bereit,готовый (что-то сделать)
+823,fertig,готовый (завершенный)
+824,aufmerksam,внимательный
+825,vorsichtig,осторожный
+826,Haupt...,главный
+827,fähig,способный
+828,notwendig,необходимый
+829,wichtig,важный
+830,sicher,уверенный 
+831,echt,"настоящий, истинный; правда"
+832,besser,лучше; более хороший
+833,best,лучший
+834,mehr,больше (по количеству); более
+835,meist,наибольший (по количеству)
+836,lieber,"лучше, охотней"
+837,am liebsten,охотней всего
+838,manchmal,иногда
+839,nie,никогда
+840,selten,редко
+841,gewöhnlich,обычно
+842,oft,часто
+843,immer,всегда
+844,bald,скоро
+845,vor kurzem,недавно
+846,weit,далеко
+847,genau,точно
+848,wahrscheinlich,вероятно
+849,vielleicht,может быть
+850,wirklich,действительно
+851,natürlich,конечно
+852,sicherlich,"наверняка, безусловно"
+853,offensichtlich,очевидно
+854,besonders,особенно 
+855,gern,охотно
+856,ja,да
+857,nein,нет
+858,nicht,не
+859,dieser,этот 
+860,jener,тот
+861,viele,много (+ слово во множественном числе)
+862,viel,много (+ слово в единственном числе)
+863,wenig,мало
+864,einige,некоторые
+865,mehrere,несколько
+866,jemand,кто-то
+867,niemand,никто
+868,etwas,что-то; немножко
+869,nichts,ничто 
+870,alles,всё
+871,alle,все
+872,hier,здесь
+873,hierher,сюда
+874,dort,там
+875,dorthin,туда 
+876,da,тут; так как
+877,jetzt,сейчас
+878,wieder,"снова, опять"
+879,dann,потом
+880,damals,тогда
+881,als,чем (при сравнении); когда; в качестве
+882,schon,уже
+883,nur,только
+884,noch,ещё
+885,fast,почти
+886,sehr,очень
+887,jeder,каждый
+888,anderer,другой
+889,solcher,такой
+890,so,так
+891,also,итак
+892,oben,вверху
+893,unten,внизу
+894,zusammen,вместе
+895,vorwärts,вперед
+896,vorne,впереди
+897,sogar,даже
+898,genug,достаточно
+899,auch,"тоже, также"
+900,und,и
+901,oder,или
+902,aber,но
+903,jedoch,однако
+904,weil,"потому что, так как"
+905,deshalb,поэтому
+906,ob,ли
+907,obwohl,хотя
+908,dass,что
+909,sein,"быть, являться"
+910,tun,делать (вообще)
+911,machen,делать (что-то)
+912,haben,иметь
+913,können,мочь (быть в состоянии) 
+914,dürfen,мочь (иметь разрешение)
+915,wollen,хотеть
+916,mögen,"любить, нравиться"
+917,möchten,хотелось бы
+918,müssen,быть должным (по внутренним причинам)
+919,sollen,быть должным (по внешним причинам)
+920,haben zu,должен (что-то сделать)
+921,sein zu,должен (быть сделанным)
+922,brauchen,нуждаться
+923,gehen,идти
+924,fahren,ехать
+925,finden,находить
+926,halten,держать; останавливаться
+927,stehen,стоять
+928,sitzen,сидеть
+929,hören,"слышать, слушать"
+930,gewinnen,"побеждать, выигрывать"
+931,erhalten,получать (офиц.)
+932,bekommen,получать
+933,kriegen,получать (разг.)
+934,kommen,"приходить, приезжать"
+935,werden,становиться; передаёт будущее время; передаёт страдательный залог
+936,laufen,бежать
+937,sehen,видеть
+938,schreiben,писать
+939,fallen,падать
+940,tragen,носить
+941,nehmen,брать
+942,geben,давать
+943,schenken,дарить
+944,entschuldigen,прощать
+945,vergessen,забывать
+946,essen,кушать
+947,liegen,лежать
+948,legen,класть
+949,lügen,лгать
+950,führen,вести
+951,füttern,кормить
+952,sagen,сказать
+953,bezahlen,оплачивать
+954,trinken,пить
+955,schwimmen,плавать
+956,singen,петь
+957,beginnen,начинать
+958,klingen,звенеть
+959,rufen,звать; кричать
+960,anrufen,звонить
+961,sinken,опускаться; погружаться
+962,stinken,вонять
+963,fliegen,летать
+964,wissen,знать 
+965,kennen,"знать, быть знакомым"
+966,zeichnen,"рисовать, чертить"
+967,malen,рисовать
+968,werfen,"кидать, бросать"
+969,wachsen,расти
+970,blasen,дуть
+971,sprechen,"разговаривать, говорить"
+972,wählen,выбирать
+973,wecken,будить
+974,brechen,ломать
+975,zeigen,показывать
+976,schneiden,резать
+977,setzen sich,садиться
+978,kosten,стоить
+979,lassen,позволять; оставлять
+980,schließen,закрывать
+981,schlagen,"ударять, бить"
+982,lesen,читать
+983,senden,посылать
+984,verbringen,проводить (время)
+985,leihen,одолжить
+986,bauen,строить
+987,fühlen,чувствовать
+988,treffen,встречать; попасть (в цель)
+989,schlafen,спать
+990,verlassen,покидать
+991,kaufen,покупать
+992,bringen,"приносить, привозить"
+993,lehren,"учить, обучать"
+994,denken,думать
+995,kämpfen,бороться
+996,fangen,ловить
+997,befürchten,"бояться, опасаться"
+998,interessieren sich,интересоваться
+999,überraschen,удивлять
+1000,aufstehen,вставать 
+1001,ziehen,тянуть; перемещаться
+1002,anziehen,надевать
+1003,ausziehen,снимать (одежду)
+1004,leben,жить 
+1005,wohnen,проживать
+1006,arbeiten,работать
+1007,fernsehen,смотреть телевизор
+1008,waschen,"мыть, cтирать"
+1009,rasieren sich,бриться
+1010,versuchen,"пытаться, пробовать"
+1011,feiern,праздновать
+1012,lächeln,улыбаться
+1013,lachen,смеяться
+1014,weinen,плакать
+1015,lernen,учить(ся)
+1016,studieren,учиться (в вузе); изучать
+1017,ändern,(из)менять
+1018,öffnen,открывать
+1019,tanzen,танцевать
+1020,fragen,спрашивать
+1021,bitten,просить 
+1022,bieten,предлагать
+1023,antworten,отвечать
+1024,sammeln,собирать
+1025,gefallen,нравиться
+1026,kochen,варить; готовить
+1027,backen,печь
+1028,riechen,пахнуть; нюхать
+1029,warten,ждать
+1030,erwarten,ожидать
+1031,danken,благодарить
+1032,spielen,играть
+1033,rauchen,курить
+1034,wünschen,желать
+1035,schreien,кричать
+1036,träumen,мечтать; видеть сон
+1037,hoffen,надеяться
+1038,erinnern sich,вспоминать
+1039,erinnern,напоминать
+1040,genießen,наслаждаться; пользоваться
+1041,erklären,объяснять
+1042,bleiben,оставаться
+1043,erholen sich,отдыхать
+1044,abbiegen,повернуть
+1045,heben,поднимать
+1046,glauben,"верить, полагать"
+1047,helfen,помогать
+1048,bestellen,заказывать
+1049,befehlen,приказывать
+1050,besuchen,посещать
+1051,prüfen,проверять
+1052,springen,прыгать
+1053,reisen,путешествовать
+1054,entscheiden,"решать, принимать решение"
+1055,lösen,решать (проблему); растворять
+1056,stimmen,"быть правильным, верным"
+1057,zustimmen,соглашаться 
+1058,retten,спасать
+1059,speichern,"сохранять, накапливать"
+1060,sparen,"экономить, копить"
+1061,streiten,спорить 
+1062,zählen,считать
+1063,sorgen sich,беспокоиться
+1064,scherzen,шутить
+1065,"bewegen sich",двигаться
+1066,passen,"соответствовать, подходить"
+1067,sterben,умирать
+1068,beeinflussen,влиять
+1069,unterstützen,поддерживать
+1070,beschreiben,описывать
+1071,bestrafen,наказывать
+1072,vorhaben,намереваться
+1073,klagen,жаловаться
+1074,vermeiden,избегать
+1075,zurückkehren,возвращаться
+1076,stören,"беспокоить, мешать" 
+1077,vorstellen,"представлять, знакомить"
+1078,kennenlernen,"узнавать, знакомиться"
+1079,überzeugen,убеждать
+1080,genehmigen,"позволять, санкционировать, одобрять"
+1081,schätzen,ценить

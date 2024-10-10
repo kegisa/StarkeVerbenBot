@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: levin
+      changes:
+        - createTable:
+            tableName: worte
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: word
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: translation
+                  type: varchar
+                  constraints:
+                    nullable: false
+          addPrimaryKey:
+            columnNames: id
+            tableName: worte

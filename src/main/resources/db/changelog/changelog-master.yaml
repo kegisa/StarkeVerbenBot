@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-table-starke-verben.yaml
+  - include:
+      file: db/changelog/changeset/import-verben.yaml
+  - include:
+      file: db/changelog/changeset/create-table-users.yaml
+  - include:
+      file: db/changelog/changeset/create-table-worte.yaml
+  - include:
+      file: db/changelog/changeset/import-worte.yaml

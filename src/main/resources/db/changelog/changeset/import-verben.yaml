@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: levin
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: serial
+              - column:
+                  header: präteritum
+                  name: präteritum
+                  type: text
+              - column:
+                  header: präsens
+                  name: präsens
+                  type: text
+              - column:
+                  header: partizip2
+                  name: partizip2
+                  type: text
+              - column:
+                  header: translation
+                  name: translation
+                  type: text
+            relativeToChangelogFile: true
+            file: ./file/verben.csv
+            tableName: starke_verben

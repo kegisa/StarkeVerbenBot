@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: levin
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: serial
+              - column:
+                  header: word
+                  name: word
+                  type: varchar
+              - column:
+                  header: translation
+                  name: translation
+                  type: varchar
+            relativeToChangelogFile: true
+            file: ./file/1000worte.csv
+            tableName: worte

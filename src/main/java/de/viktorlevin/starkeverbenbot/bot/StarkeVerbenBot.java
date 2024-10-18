@@ -2,15 +2,12 @@ package de.viktorlevin.starkeverbenbot.bot;
 
 import de.viktorlevin.starkeverbenbot.configuration.BotConfig;
 import de.viktorlevin.starkeverbenbot.service.MainService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.List;
 
 @Slf4j
 @Component

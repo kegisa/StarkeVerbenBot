@@ -13,5 +13,10 @@ spec:
         app: starke-verben-bot
     spec:
       containers:
-        - name: spring-boot-app
+        - name: starke-verben-bot
           image: kegisa/starkevebenbot:amd64
+          envFrom:
+            - configMapRef:
+                name: starke-verben-bot-local-configmap
+            - secretRef:
+                name: starke-verben-bot-secret

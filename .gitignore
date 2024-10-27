@@ -39,3 +39,4 @@ out/
 ### yamls ###
 *-local.yml
 docker-compose.yml
+*-secret.yaml

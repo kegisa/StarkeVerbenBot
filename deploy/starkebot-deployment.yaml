@@ -15,6 +15,7 @@ spec:
       containers:
         - name: starke-verben-bot
           image: kegisa/starkevebenbot:amd64
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: starke-verben-bot-local-configmap

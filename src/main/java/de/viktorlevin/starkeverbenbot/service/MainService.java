@@ -1,5 +1,6 @@
 package de.viktorlevin.starkeverbenbot.service;
 
+import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class MainService {
     private final TextService textService;
     private final StarkeVerbenService starkeVerbenService;
     private final WortService wortService;
+    private final StatisticService statisticService;
 
     public SendMessage process(Update update) {
         if (update.hasMessage() && isTextMessage(update)) {
@@ -50,7 +52,9 @@ public class MainService {
     }
 
     public SendMessage processTextMessage(String messageText, Long chatId, String userName) {
-        userService.registrateUser(chatId, userName);
+        BotUser user = userService.registrateUser(chatId, userName);
+        statisticService.saveRequestToStatistic(user, messageText);
+
         log.info("Text is {}", messageText);
 
         switch (messageText) {

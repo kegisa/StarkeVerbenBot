@@ -16,17 +16,18 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private static final Map<Long, String> cachedUsers = new HashMap<>();
+    private static final Map<Long, BotUser> cachedUsers = new HashMap<>();
 
     @Transactional
-    public void registrateUser(Long chatId, String userName) {
+    public BotUser registrateUser(Long chatId, String userName) {
         if (cachedUsers.containsKey(chatId)) {
-            return;
+            return cachedUsers.get(chatId);
         }
 
-        userRepository.findByChatId(chatId).ifPresentOrElse(
-                user -> cachedUsers.put(chatId, userName),
-                () -> userRepository.save(new BotUser(userName, chatId)));
+        BotUser user = userRepository.findByChatId(chatId)
+                .orElseGet(() -> userRepository.save(new BotUser(userName, chatId)));
+        cachedUsers.put(chatId, user);
+        return user;
     }
 
     @Transactional(readOnly = true)

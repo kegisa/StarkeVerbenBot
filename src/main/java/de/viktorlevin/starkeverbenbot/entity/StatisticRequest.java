@@ -15,9 +15,10 @@ public class StatisticRequest {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private BotUser user;
 
@@ -27,4 +28,9 @@ public class StatisticRequest {
     @Column(name = "requested_at")
     @CreationTimestamp
     private OffsetDateTime requestedAt;
+
+    public StatisticRequest(BotUser user, String request) {
+        this.user = user;
+        this.request = request;
+    }
 }

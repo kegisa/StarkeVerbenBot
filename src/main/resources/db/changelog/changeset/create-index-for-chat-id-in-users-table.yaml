@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: levin
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: chat_id
+            indexName: idx_bot_users_chat_id
+            tableName: bot_users
+            unique: false

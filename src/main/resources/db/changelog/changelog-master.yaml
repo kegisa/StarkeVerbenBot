@@ -13,3 +13,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-table-learned-words.yaml
   - include:
       file: db/changelog/changeset/create-table-requests-statistic.yaml
+  - include:
+      file: db/changelog/changeset/create-index-for-chat-id-in-users-table.yaml

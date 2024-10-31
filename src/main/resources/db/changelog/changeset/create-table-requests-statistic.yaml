@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: levin
+      changes:
+        - createTable:
+            tableName: requests_statistic
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: serial
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    referencedTableName: bot_users
+                    referencedColumnNames: id
+              - column:
+                  name: request
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: requested_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+          addPrimaryKey:
+            columnNames: id
+            tableName: requests_statistic

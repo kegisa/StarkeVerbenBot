@@ -1,6 +1,5 @@
 package de.viktorlevin.starkeverbenbot.service;
 
-import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class TextService {
@@ -67,11 +65,6 @@ public class TextService {
                                 .length(textResponse.length() - infinitiv.length())
                                 .build()))
                 .build();
-    }
-
-    public SendMessage sendUsers(List<BotUser> users, Long chatId) {
-        String textWithUsers = users.stream().map(BotUser::toString).collect(Collectors.joining(","));
-        return createMessage(chatId, textWithUsers);
     }
 
     public SendMessage generateWort(Wort wort, Long chatId) {

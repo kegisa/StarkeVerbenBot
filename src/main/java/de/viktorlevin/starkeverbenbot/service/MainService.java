@@ -66,8 +66,6 @@ public class MainService {
             case "/einWort", "ein Wort bitte":
                 Wort wort = wortService.getRandomWort();
                 return textService.generateWort(wort, chatId);
-            case "/getallusers":
-                return textService.sendUsers(userService.getUsers(), chatId);
             default:
                 log.info("Unexpected message");
                 return textService.unexpectedMessage(chatId);

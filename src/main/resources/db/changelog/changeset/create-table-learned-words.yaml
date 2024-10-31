@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: levin
+      changes:
+        - createTable:
+            tableName: learned_words
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    referencedTableName: bot_users
+                    referencedColumnNames: id
+              - column:
+                  name: word_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: word_id_fk
+                    referencedTableName: worte
+                    referencedColumnNames: id
+          addPrimaryKey:
+            columnNames: id
+            tableName: learned_words

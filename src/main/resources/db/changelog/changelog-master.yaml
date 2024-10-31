@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-table-worte.yaml
   - include:
       file: db/changelog/changeset/import-worte.yaml
+  - include:
+      file: db/changelog/changeset/create-table-learned-words.yaml

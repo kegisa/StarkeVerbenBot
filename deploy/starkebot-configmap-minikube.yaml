@@ -5,3 +5,4 @@ metadata:
 data:
   SPRING_DATASOURCE_URL: jdbc:postgresql://host.minikube.internal:5433/starke-db
   WORDS_AT_THE_MOMENT: 12
+  VERBS_AT_THE_MOMENT: 12

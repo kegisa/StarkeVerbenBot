@@ -16,12 +16,16 @@ import java.util.Random;
 public class TextService {
     private final MessageService messageService;
     private static final Random random = new Random();
-    private static final String BEKOMMEN_HELP = """
-            Бот поможет тебе выучить 1000 самых популярных немецких слов и 120 сильных глаголов.
+    private String BEKOMMEN_HELP = """
+            Бот поможет тебе выучить 1080 самых популярных немецких слов и 172 сильных глагола.
             Жмите кнопку “Убрать слово! Я запомнил” только когда уверены, что запомнили слово.
-                        
-            /einVerb --> Получить рандомный сильный глагол с переводом и формами
-            /einWort --> Получить рандомное слово с переводом
+                       
+            Кнопка "ein starkes Verb bitte" --> Получить рандомный сильный глагол с переводом и формами
+            Кнопка "ein Wort bitte" --> Получить рандомное слово с переводом
+            
+            Также можно воспользоваться ссыклами:
+            /einVerb
+            /einWort
             """;
     private static final String UNEXPECTED_MESSAGE = "Не могу обработать это сообщение...entschuldigung";
     private static final String INFINITIV = "%s\n";

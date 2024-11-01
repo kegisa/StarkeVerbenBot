@@ -40,7 +40,7 @@ public class WortService {
     @Transactional
     public void initializeLearningProcess(BotUser user) {
         log.info("Initializing learning process for {}", user.getUsername());
-        if (learnedWordsRepository.count() >= wordsAtTheMoment) {
+        if (learnedWordsRepository.countByUser(user) > 0) {
             log.info("Learning process already was initiated for user {}", user.getUsername());
             return;
         }

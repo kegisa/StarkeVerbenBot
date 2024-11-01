@@ -4,3 +4,4 @@ metadata:
   name: starke-verben-bot-minikube-configmap
 data:
   SPRING_DATASOURCE_URL: jdbc:postgresql://host.minikube.internal:5433/starke-db
+  WORDS_AT_THE_MOMENT: 12

@@ -22,8 +22,6 @@ databaseChangeLog:
               - column:
                   name: username
                   type: varchar
-                  constraints:
-                    nullable: false
               - column:
                   name: registration_date
                   type: datetime

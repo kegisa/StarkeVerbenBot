@@ -39,6 +39,10 @@ public class TextService {
         return messageService.createMessage(chatId, UNEXPECTED_MESSAGE);
     }
 
+    public SendMessage createMessage(Long chatId, String message) {
+        return messageService.createMessage(chatId, message);
+    }
+
     public SendMessage generateStarkesVerb(StarkesVerb starkesVerb, Long chatId) {
         String infinitiv = INFINITIV.formatted(starkesVerb.getInfinitiv());
         String textResponse = STARKES_VERB_MESSAGE.formatted(

@@ -33,10 +33,10 @@ public class KeyboadService {
         return sendMessage;
     }
 
-    public SendMessage addInlineKeyBoard(SendMessage wordMessage) {
+    public SendMessage addInlineKeyBoard(SendMessage wordMessage, Integer wordId) {
         InlineKeyboardButton button = InlineKeyboardButton.builder()
                 .text("Кажется запомнил!")
-                .callbackData("Data").build();
+                .callbackData(Integer.toString(wordId)).build();
 
         wordMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(button))

@@ -13,4 +13,4 @@ bot:
   token: ${BOT_TOKEN}
 
 words:
-  wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:2}
+  wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}

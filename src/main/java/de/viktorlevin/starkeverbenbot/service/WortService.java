@@ -19,19 +19,22 @@ import java.util.List;
 public class WortService {
     private final WortRepository wortRepository;
     private final LearnedWordsRepository learnedWordsRepository;
+    private final UserService userService;
 
     @Value("${words.wordsAtTheMoment}")
     private Long wordsAtTheMoment;
 
     @Transactional(readOnly = true)
     public Wort getRandomWort(BotUser user) {
-        return learnedWordsRepository.getRandomWort(user.getId()).getWort();
+        LearnedWort randomWort = learnedWordsRepository.getRandomWort(user.getId())
+                .orElseThrow(() -> new IllegalStateException("Вы выучили все слова из списка!"));
+        return randomWort.getWort();
     }
 
     @Transactional
     public void initializeLearningProcess(BotUser user) {
         log.info("Initializing learning process for {}", user.getUsername());
-        if (learnedWordsRepository.countByUser(user) >= wordsAtTheMoment) {
+        if (learnedWordsRepository.count() >= wordsAtTheMoment) {
             log.info("Learning process already was initiated for user {}", user.getUsername());
             return;
         }
@@ -42,5 +45,26 @@ public class WortService {
                 .toList();
         learnedWordsRepository.saveAll(firstWordsToLearn);
         log.info("Initializing was processed for {} successfully", user.getUsername());
+    }
+
+    @Transactional
+    public void markWordAsLearned(String wordIdString, Long chatId, String userName) {
+        Integer wordId = Integer.valueOf(wordIdString);
+        BotUser user = userService.registrateUser(chatId, userName);
+
+        learnedWordsRepository.findByUserAndWort_Id(user, wordId)
+                .ifPresent(learnedWort -> learnedWort.setStatus(LearnedWort.Status.FINISHED));
+        long learnedWordsCount = learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.IN_PROGRESS);
+        if (learnedWordsCount < wordsAtTheMoment) {
+            fillLearningWords(wordsAtTheMoment - learnedWordsCount, user);
+        }
+    }
+
+    private void fillLearningWords(long times, BotUser user) {
+        for (int i = 0; i < times; i++) {
+            wortRepository.getNewWordForLearning(user.getId()).ifPresent(word ->
+                    learnedWordsRepository.save(new LearnedWort(user, word, LearnedWort.Status.IN_PROGRESS))
+            );
+        }
     }
 }

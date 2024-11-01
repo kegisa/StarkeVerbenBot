@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
@@ -28,26 +30,30 @@ public class MainService {
 
     public List<BotApiMethod> process(Update update) {
         if (update.hasMessage() && isTextMessage(update)) {
-            log.info("Got text message from {}", update.getMessage().getChat().getUserName());
-            return List.of(processTextMessage(
-                    update.getMessage().getText(),
-                    update.getMessage().getChatId(),
-                    update.getMessage().getChat().getUserName()));
+            try {
+                return List.of(processTextMessage(update.getMessage()));
+            } catch (Exception exception) {
+                return List.of(textService.createMessage(update.getMessage().getChatId(), exception.getMessage()));
+            }
         }
         if (update.hasCallbackQuery()) {
-            //wortService.markWordAsLearned();
-            Long chatId = update.getCallbackQuery().getMessage().getChatId();
-            Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
-            var deleteKeybord = messageService.createEditMessageReplyMarkup(chatId, messageId);
-            var sayUserThatMarkedWord = textService.markedWordAsLearned(chatId);
-            return List.of(deleteKeybord, sayUserThatMarkedWord);
-
+            try {
+                return processCallbackQuery(update.getCallbackQuery());
+            } catch (Exception exception) {
+                return List.of(textService.createMessage(update.getCallbackQuery().getFrom().getId(), exception.getMessage()));
+            }
         }
-        return List.of(textService.unexpectedMessage(update.getMessage().getChatId()));
+        log.error("Could not process this message {}", update.getMessage());
+        throw new IllegalStateException("Could not process this message");
     }
 
 
-    public SendMessage processTextMessage(String messageText, Long chatId, String userName) {
+    public SendMessage processTextMessage(Message message) {
+        String userName = message.getChat().getUserName();
+        Long chatId = message.getChat().getId();
+        String messageText = message.getText();
+
+        log.info("Got text message from {}", userName);
         BotUser user = userService.registrateUser(chatId, userName);
         statisticService.saveRequestToStatistic(user, messageText);
 
@@ -64,11 +70,25 @@ public class MainService {
             case "/einWort", "ein Wort bitte":
                 Wort wort = wortService.getRandomWort(user);
                 SendMessage wordMessage = textService.generateWort(wort, chatId);
-                return keyboadService.addInlineKeyBoard(wordMessage);
+                return keyboadService.addInlineKeyBoard(wordMessage, wort.getId());
             default:
-                log.info("Unexpected message");
-                return textService.unexpectedMessage(chatId);
+                throw new IllegalStateException("Я не понимаю, что мне делать...");
         }
+    }
+
+
+    private List<BotApiMethod> processCallbackQuery(CallbackQuery callbackQuery) {
+        wortService.markWordAsLearned(callbackQuery.getData(),
+                callbackQuery.getFrom().getId(),
+                callbackQuery.getFrom().getUserName());
+
+        Long chatId = callbackQuery.getMessage().getChatId();
+        Integer messageId = callbackQuery.getMessage().getMessageId();
+
+        var deleteKeybord = messageService.createEditMessageReplyMarkup(chatId, messageId);
+        var sayUserThatMarkedWord = textService.markedWordAsLearned(chatId);
+
+        return List.of(deleteKeybord, sayUserThatMarkedWord);
     }
 
     private boolean isTextMessage(Update update) {

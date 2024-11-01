@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10
+      author: levin
+      changes:
+        - createTable:
+            tableName: learned_starke_verben
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    referencedTableName: bot_users
+                    referencedColumnNames: id
+              - column:
+                  name: verb_id
+                  type: integer
+                  constraints:
+                    nullable: false
+                    foreignKeyName: word_id_fk
+                    referencedTableName: starke_verben
+                    referencedColumnNames: id
+              - column:
+                  name: status
+                  type: smallint
+                  constraints:
+                    nullable: false
+          addPrimaryKey:
+            columnNames: id
+            tableName: learned_starke_verben

@@ -28,7 +28,7 @@ public class WortService {
     public Wort getRandomWort(BotUser user) {
         LearnedWort randomWort = learnedWordsRepository.getRandomWort(user.getId())
                 .orElseGet(() -> {
-                    if(learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED) == 0) {
+                    if (learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED) == 0) {
                         initializeLearningProcess(user);
                         return learnedWordsRepository.getRandomWort(user.getId()).get();
                     }
@@ -39,9 +39,9 @@ public class WortService {
 
     @Transactional
     public void initializeLearningProcess(BotUser user) {
-        log.info("Initializing learning process for {}", user.getUsername());
+        log.info("Initializing words learning process for {}", user.getUsername());
         if (learnedWordsRepository.countByUser(user) > 0) {
-            log.info("Learning process already was initiated for user {}", user.getUsername());
+            log.info("Words learning process already was initiated for user {}", user.getUsername());
             return;
         }
 
@@ -50,12 +50,12 @@ public class WortService {
                 .map(wort -> new LearnedWort(user, wort, LearnedWort.Status.IN_PROGRESS))
                 .toList();
         learnedWordsRepository.saveAll(firstWordsToLearn);
-        log.info("Initializing was processed for {} successfully", user.getUsername());
+        log.info("Initializing of learning words was processed for {} successfully", user.getUsername());
     }
 
     @Transactional
-    public void markWordAsLearned(String wordIdString, Long chatId, String userName) {
-        Integer wordId = Integer.valueOf(wordIdString);
+    public void markWordAsLearned(String callbackData, Long chatId, String userName) {
+        Integer wordId = Integer.valueOf(callbackData.split(":")[1]);
         BotUser user = userService.registrateUser(chatId, userName);
 
         learnedWordsRepository.findByUserAndWort_Id(user, wordId)

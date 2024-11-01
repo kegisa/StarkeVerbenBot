@@ -62,15 +62,17 @@ public class MainService {
         switch (messageText) {
             case "/start":
                 wortService.initializeLearningProcess(user);
+                starkeVerbenService.initializeLearningProcess(user);
                 SendMessage startMessage = textService.startBot(chatId);
                 return keyboadService.addKeyBoardMarkup(startMessage);
             case "/einVerb", "ein starkes Verb bitte":
-                StarkesVerb starkesVerb = starkeVerbenService.getRandomStarkesVerb();
-                return textService.generateStarkesVerb(starkesVerb, chatId);
+                StarkesVerb starkesVerb = starkeVerbenService.getRandomStarkesVerb(user);
+                SendMessage verbMessage = textService.generateStarkesVerb(starkesVerb, chatId);
+                return keyboadService.addInlineKeyBoardForVerb(verbMessage, starkesVerb.getId());
             case "/einWort", "ein Wort bitte":
                 Wort wort = wortService.getRandomWort(user);
                 SendMessage wordMessage = textService.generateWort(wort, chatId);
-                return keyboadService.addInlineKeyBoard(wordMessage, wort.getId());
+                return keyboadService.addInlineKeyBoardForWord(wordMessage, wort.getId());
             default:
                 throw new IllegalStateException("Я не понимаю, что мне делать...");
         }
@@ -78,17 +80,25 @@ public class MainService {
 
 
     private List<BotApiMethod> processCallbackQuery(CallbackQuery callbackQuery) {
-        wortService.markWordAsLearned(callbackQuery.getData(),
-                callbackQuery.getFrom().getId(),
-                callbackQuery.getFrom().getUserName());
-
         Long chatId = callbackQuery.getMessage().getChatId();
         Integer messageId = callbackQuery.getMessage().getMessageId();
+        SendMessage sayUserThatMarked = null;
+
+        if (callbackQuery.getData().contains("word")) {
+            wortService.markWordAsLearned(callbackQuery.getData(),
+                    callbackQuery.getFrom().getId(),
+                    callbackQuery.getFrom().getUserName());
+            sayUserThatMarked = textService.markedWordAsLearned(chatId);
+        } else {
+            starkeVerbenService.markVerbAsLearned(callbackQuery.getData(),
+                    callbackQuery.getFrom().getId(),
+                    callbackQuery.getFrom().getUserName());
+            sayUserThatMarked = textService.markedVerbAsLearned(chatId);
+        }
 
         var deleteKeybord = messageService.createEditMessageReplyMarkup(chatId, messageId);
-        var sayUserThatMarkedWord = textService.markedWordAsLearned(chatId);
 
-        return List.of(deleteKeybord, sayUserThatMarkedWord);
+        return List.of(deleteKeybord, sayUserThatMarked);
     }
 
     private boolean isTextMessage(Update update) {

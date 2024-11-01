@@ -14,3 +14,5 @@ bot:
 
 words:
   wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}
+verbs:
+  verbsAtTheMoment: ${VERBS_AT_THE_MOMENT:12}

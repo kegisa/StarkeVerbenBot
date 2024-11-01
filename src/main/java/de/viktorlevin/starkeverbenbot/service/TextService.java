@@ -19,7 +19,7 @@ public class TextService {
     private static final String BEKOMMEN_HELP = """
             Бот поможет тебе выучить 1000 самых популярных немецких слов и 120 сильных глаголов.
             Жмите кнопку “Убрать слово! Я запомнил” только когда уверены, что запомнили слово.
-            
+                        
             /einVerb --> Получить рандомный сильный глагол с переводом и формами
             /einWort --> Получить рандомное слово с переводом
             """;
@@ -95,5 +95,9 @@ public class TextService {
 
     public SendMessage markedWordAsLearned(Long chatId) {
         return messageService.createMessage(chatId, "Хорошо, уберу это слово...И добавлю новое...");
+    }
+
+    public SendMessage markedVerbAsLearned(Long chatId) {
+        return messageService.createMessage(chatId, "Хорошо, уберу этот глагол...И добавлю новый...");
     }
 }

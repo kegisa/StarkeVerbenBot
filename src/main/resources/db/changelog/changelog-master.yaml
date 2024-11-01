@@ -17,3 +17,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-index-for-chat-id-in-users-table.yaml
   - include:
       file: db/changelog/changeset/add-column-learned-words.yaml
+  - include:
+      file: db/changelog/changeset/create-table-learned-verben.yaml

@@ -34,13 +34,13 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
     }
 
     private void sendToUser(List<BotApiMethod> apiMethods) {
-            apiMethods.forEach(apiMethod -> {
-                try {
-                    execute(apiMethod);
-                } catch (TelegramApiException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            log.info("Reply sent");
+        apiMethods.forEach(apiMethod -> {
+            try {
+                execute(apiMethod);
+            } catch (TelegramApiException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        log.info("Reply sent");
     }
 }

@@ -39,9 +39,9 @@ public class StarkeVerbenService {
 
     @Transactional
     public void initializeLearningProcess(BotUser user) {
-        log.info("Initializing verbs learning process for {}", user.getUsername());
+        log.info("Initializing verbs learning process for {}", user.getChatId());
         if (learnedStarkeVerbenRepository.countByUser(user) > 0) {
-            log.info("Verbs learning process already was initiated for user {}", user.getUsername());
+            log.info("Verbs learning process already was initiated for user {}", user.getChatId());
             return;
         }
 
@@ -50,7 +50,7 @@ public class StarkeVerbenService {
                 .map(verb -> new LearnedStarkesVerb(user, verb, LearnedStarkesVerb.Status.IN_PROGRESS))
                 .toList();
         learnedStarkeVerbenRepository.saveAll(firstVerbsToLearn);
-        log.info("Initializing of learning verbs was processed for {} successfully", user.getUsername());
+        log.info("Initializing of learning verbs was processed for {} successfully", user.getChatId());
     }
 
     @Transactional

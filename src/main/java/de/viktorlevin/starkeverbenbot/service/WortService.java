@@ -39,9 +39,9 @@ public class WortService {
 
     @Transactional
     public void initializeLearningProcess(BotUser user) {
-        log.info("Initializing words learning process for {}", user.getUsername());
+        log.info("Initializing words learning process for {}", user.getChatId());
         if (learnedWordsRepository.countByUser(user) > 0) {
-            log.info("Words learning process already was initiated for user {}", user.getUsername());
+            log.info("Words learning process already was initiated for user {}", user.getChatId());
             return;
         }
 
@@ -50,7 +50,7 @@ public class WortService {
                 .map(wort -> new LearnedWort(user, wort, LearnedWort.Status.IN_PROGRESS))
                 .toList();
         learnedWordsRepository.saveAll(firstWordsToLearn);
-        log.info("Initializing of learning words was processed for {} successfully", user.getUsername());
+        log.info("Initializing of learning words was processed for {} successfully", user.getChatId());
     }
 
     @Transactional

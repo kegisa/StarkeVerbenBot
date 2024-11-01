@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class StarkeVerbenService {
     private final StarkesVerbRepository starkesVerbRepository;
 
+
     @Transactional(readOnly = true)
     public StarkesVerb getRandomStarkesVerb() {
         return starkesVerbRepository.getRandomStarkesVerb();
     }
+
 }

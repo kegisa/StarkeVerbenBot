@@ -59,12 +59,13 @@ public class MainService {
 
         switch (messageText) {
             case "/start":
+                wortService.initializeLearningProcess(user);
                 return textService.startBot(chatId);
             case "/einVerb", "ein Verb bitte":
                 StarkesVerb starkesVerb = starkeVerbenService.getRandomStarkesVerb();
                 return textService.generateStarkesVerb(starkesVerb, chatId);
             case "/einWort", "ein Wort bitte":
-                Wort wort = wortService.getRandomWort();
+                Wort wort = wortService.getRandomWort(user);
                 return textService.generateWort(wort, chatId);
             default:
                 log.info("Unexpected message");

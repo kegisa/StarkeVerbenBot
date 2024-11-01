@@ -15,7 +15,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: user_id
-                  type: bigint
+                  type: integer
                   constraints:
                     nullable: false
                     foreignKeyName: user_id_fk
@@ -23,7 +23,7 @@ databaseChangeLog:
                     referencedColumnNames: id
               - column:
                   name: word_id
-                  type: bigint
+                  type: integer
                   constraints:
                     nullable: false
                     foreignKeyName: word_id_fk

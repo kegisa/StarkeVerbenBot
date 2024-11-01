@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 9
+      author: levin
+      changes:
+        - addColumn:
+            tableName: learned_words
+            columns:
+              - column:
+                  name: status
+                  type: smallint
+                  constraints:
+                    nullable: false

@@ -15,7 +15,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: user_id
-                  type: serial
+                  type: integer
                   constraints:
                     nullable: false
                     foreignKeyName: user_id_fk

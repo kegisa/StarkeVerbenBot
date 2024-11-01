@@ -5,9 +5,11 @@ import de.viktorlevin.starkeverbenbot.service.MainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -31,12 +33,14 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         sendToUser(mainService.process(update));
     }
 
-    private void sendToUser(SendMessage sendMessage) {
-        try {
-            execute(sendMessage);
+    private void sendToUser(List<BotApiMethod> apiMethods) {
+            apiMethods.forEach(apiMethod -> {
+                try {
+                    execute(apiMethod);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             log.info("Reply sent");
-        } catch (TelegramApiException e) {
-            log.error(e.getMessage());
-        }
     }
 }

@@ -2,6 +2,8 @@ package de.viktorlevin.starkeverbenbot.service;
 
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
+import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
@@ -10,8 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class TextService {
-    private final Random random = new Random();
+    private final MessageService messageService;
+    private static final Random random = new Random();
     private static final String BEKOMMEN_HELP = """
             /einVerb --> Получить рандомный сильный глагол с переводом и формами
             /einWort --> Получить рандомное слово с переводом
@@ -27,19 +31,12 @@ public class TextService {
     private static final String WORT_AND_TRANSLATION = "%s\n%s";
 
     public SendMessage startBot(Long chatId) {
-        return createMessage(chatId, BEKOMMEN_HELP);
+        return messageService.createMessage(chatId, BEKOMMEN_HELP);
     }
 
 
     public SendMessage unexpectedMessage(Long chatId) {
-        return createMessage(chatId, UNEXPECTED_MESSAGE);
-    }
-
-    private SendMessage createMessage(Long chatId, String text) {
-        return SendMessage.builder()
-                .chatId(chatId)
-                .text(text)
-                .build();
+        return messageService.createMessage(chatId, UNEXPECTED_MESSAGE);
     }
 
     public SendMessage generateStarkesVerb(StarkesVerb starkesVerb, Long chatId) {
@@ -51,20 +48,16 @@ public class TextService {
                 starkesVerb.getPräsens(),
                 starkesVerb.getTranslation());
 
-        return SendMessage.builder()
-                .chatId(chatId)
-                .text(textResponse)
-                .entities(List.of(MessageEntity.builder()
-                                .type("bold")
-                                .offset(0)
-                                .length(starkesVerb.getInfinitiv().length())
-                                .build(),
-                        MessageEntity.builder()
-                                .type("spoiler")
-                                .offset(infinitiv.length())
-                                .length(textResponse.length() - infinitiv.length())
-                                .build()))
-                .build();
+        return messageService.createMessageWithEntites(chatId, textResponse, List.of(MessageEntity.builder()
+                        .type("bold")
+                        .offset(0)
+                        .length(starkesVerb.getInfinitiv().length())
+                        .build(),
+                MessageEntity.builder()
+                        .type("spoiler")
+                        .offset(infinitiv.length())
+                        .length(textResponse.length() - infinitiv.length())
+                        .build()));
     }
 
     public SendMessage generateWort(Wort wort, Long chatId) {
@@ -73,20 +66,16 @@ public class TextService {
         String textResponse = getRandomCombination(deutschWort, translation);
         int delimeter = textResponse.indexOf('\n');
 
-        return SendMessage.builder()
-                .chatId(chatId)
-                .text(textResponse)
-                .entities(List.of(MessageEntity.builder()
-                                .type("bold")
-                                .offset(0)
-                                .length(delimeter)
-                                .build(),
-                        MessageEntity.builder()
-                                .type("spoiler")
-                                .offset(delimeter + 1)
-                                .length(textResponse.length() - (delimeter + 1))
-                                .build()))
-                .build();
+        return messageService.createMessageWithEntites(chatId, textResponse, List.of(MessageEntity.builder()
+                        .type("bold")
+                        .offset(0)
+                        .length(delimeter)
+                        .build(),
+                MessageEntity.builder()
+                        .type("spoiler")
+                        .offset(delimeter + 1)
+                        .length(textResponse.length() - (delimeter + 1))
+                        .build()));
     }
 
     private String getRandomCombination(String deutschWort, String translation) {
@@ -97,4 +86,7 @@ public class TextService {
         }
     }
 
+    public SendMessage markedWordAsLearned(Long chatId) {
+        return messageService.createMessage(chatId, "Хорошо, уберу это слово...И добавлю новое..");
+    }
 }

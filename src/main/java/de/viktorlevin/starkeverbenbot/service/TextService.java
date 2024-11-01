@@ -91,6 +91,6 @@ public class TextService {
     }
 
     public SendMessage markedWordAsLearned(Long chatId) {
-        return messageService.createMessage(chatId, "Хорошо, уберу это слово...И добавлю новое..");
+        return messageService.createMessage(chatId, "Хорошо, уберу это слово...И добавлю новое...");
     }
 }

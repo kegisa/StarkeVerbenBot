@@ -24,10 +24,16 @@ public class WortService {
     @Value("${words.wordsAtTheMoment}")
     private Long wordsAtTheMoment;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Wort getRandomWort(BotUser user) {
         LearnedWort randomWort = learnedWordsRepository.getRandomWort(user.getId())
-                .orElseThrow(() -> new IllegalStateException("Вы выучили все слова из списка!"));
+                .orElseGet(() -> {
+                    if(learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED) == 0) {
+                        initializeLearningProcess(user);
+                        return learnedWordsRepository.getRandomWort(user.getId()).get();
+                    }
+                    throw new IllegalStateException("Вы выучили все слова из списка!");
+                });
         return randomWort.getWort();
     }
 

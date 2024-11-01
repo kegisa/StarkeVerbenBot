@@ -16,5 +16,6 @@ public interface LearnedWordsRepository extends JpaRepository<LearnedWort, Integ
     long countByUserAndStatus(BotUser user, LearnedWort.Status status);
 
     Optional<LearnedWort> findByUserAndWort_Id(BotUser user, Integer wortId);
+
 }
 

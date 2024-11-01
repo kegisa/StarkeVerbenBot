@@ -35,7 +35,7 @@ public class KeyboadService {
 
     public SendMessage addInlineKeyBoard(SendMessage wordMessage, Integer wordId) {
         InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text("Кажется запомнил!")
+                .text("Убрать слово! Я запомнил")
                 .callbackData(Integer.toString(wordId)).build();
 
         wordMessage.setReplyMarkup(InlineKeyboardMarkup.builder()

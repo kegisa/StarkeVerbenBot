@@ -1,11 +1,9 @@
 package de.viktorlevin.starkeverbenbot.service.alltypes;
 
-import de.viktorlevin.starkeverbenbot.repository.WortRepository;
 import de.viktorlevin.starkeverbenbot.service.StarkeVerbenService;
 import de.viktorlevin.starkeverbenbot.service.WortService;
 import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
 import de.viktorlevin.starkeverbenbot.service.voice.DownloadVoiceService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +27,7 @@ public class VoiceMessageService {
         String id = callbackQuery.getData().split(":")[1];
         if (callbackQuery.getData().contains("Verb")) {
             return getVoiceForVerb(id, callbackQuery.getMessage().getChatId());
-        } else if(callbackQuery.getData().contains("Word")) {
+        } else if (callbackQuery.getData().contains("Word")) {
             return getVoiceWord(id, callbackQuery.getMessage().getChatId());
         } else {
             log.error("Callback voice data was not recognized {}", callbackQuery.getData());
@@ -52,7 +50,7 @@ public class VoiceMessageService {
     }
 
     private String checkAndPrepareWord(String word) {
-        if(word.split(" ").length > 2 || word.contains(".")) {
+        if (word.split(" ").length > 2 || word.contains(".")) {
             throw new RuntimeException("Не могу озвучить это слово...");
         }
         return word.replace("der ", "");

@@ -7,7 +7,6 @@ import de.viktorlevin.starkeverbenbot.service.alltypes.TextMessageService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.VoiceMessageService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.SortNatural;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;

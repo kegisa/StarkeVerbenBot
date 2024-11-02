@@ -19,7 +19,7 @@ public class DownloadVoiceService {
     public InputStream getVoiceForWord(String word) {
         Response response = downloadVoiceClient.downloadVoice(word);
 
-        if(response.status() != 200) {
+        if (response.status() != 200) {
             throw new RuntimeException("Не могу озвучить это слово...");
         }
         return response.body().asInputStream();

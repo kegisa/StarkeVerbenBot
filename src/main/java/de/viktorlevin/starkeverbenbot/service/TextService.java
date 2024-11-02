@@ -16,13 +16,13 @@ import java.util.Random;
 public class TextService {
     private final MessageService messageService;
     private static final Random random = new Random();
-    private String BEKOMMEN_HELP = """
+    private final String BEKOMMEN_HELP = """
             Бот поможет тебе выучить 1080 самых популярных немецких слов и 172 сильных глагола.
             Жмите кнопку “Убрать слово! Я запомнил” только когда уверены, что запомнили слово.
-            
+                        
             Кнопка "ein Wort bitte" --> Получить рандомное слово с переводом
             Кнопка "ein starkes Verb bitte" --> Получить рандомный сильный глагол с переводом и формами
-            
+                        
             Также можно воспользоваться ссыклами:
             /einVerb
             /einWort

@@ -47,12 +47,15 @@ public class KeyboadService {
     }
 
     public SendMessage addInlineKeyBoardForVerb(SendMessage verbMessage, Integer verbId) {
-        InlineKeyboardButton button = InlineKeyboardButton.builder()
+        InlineKeyboardButton markButton = InlineKeyboardButton.builder()
                 .text("Убрать глагол! Я запомнил")
                 .callbackData(templateCallbackData.formatted("verb", Integer.toString(verbId))).build();
+        InlineKeyboardButton voiceButton = InlineKeyboardButton.builder()
+                .text("Озвучить")
+                .callbackData(templateCallbackData.formatted("voiceVerb", Integer.toString(verbId))).build();
 
         verbMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
-                .keyboardRow(List.of(button))
+                .keyboard(List.of(List.of(markButton), List.of(voiceButton)))
                 .build());
         return verbMessage;
     }

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voice-downloader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voice-downloader
+  template:
+    metadata:
+      labels:
+        app: voice-downloader
+    spec:
+      containers:
+        - name: voice-downloader
+          image: kegisa/starkeveben-voice-downloader:amd64
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: voice-downloader-configmap

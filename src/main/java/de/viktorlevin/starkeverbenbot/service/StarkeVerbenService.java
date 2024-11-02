@@ -66,6 +66,11 @@ public class StarkeVerbenService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public StarkesVerb findStarkesVerbById(Integer id) {
+        return starkesVerbRepository.findById(id).orElseThrow(() -> new RuntimeException("Что то пошло не так"));
+    }
+
     private void fillLearningVerbs(long times, BotUser user) {
         for (int i = 0; i < times; i++) {
             starkesVerbRepository.getNewVerbForLearning(user.getId()).ifPresent(verb ->

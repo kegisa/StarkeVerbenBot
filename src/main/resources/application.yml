@@ -12,6 +12,9 @@ bot:
   name: ${BOT_NAME}
   token: ${BOT_TOKEN}
 
+download-voice-api:
+  url: ${VOICE_DOWNLOADER_URL}
+
 words:
   wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}
 verbs:

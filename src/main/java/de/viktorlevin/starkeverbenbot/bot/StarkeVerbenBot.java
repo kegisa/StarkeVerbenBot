@@ -1,11 +1,17 @@
 package de.viktorlevin.starkeverbenbot.bot;
 
 import de.viktorlevin.starkeverbenbot.configuration.BotConfig;
-import de.viktorlevin.starkeverbenbot.service.MainService;
+import de.viktorlevin.starkeverbenbot.service.TextService;
+import de.viktorlevin.starkeverbenbot.service.alltypes.CallbackService;
+import de.viktorlevin.starkeverbenbot.service.alltypes.TextMessageService;
+import de.viktorlevin.starkeverbenbot.service.alltypes.VoiceMessageService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.SortNatural;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -15,12 +21,19 @@ import java.util.List;
 @Component
 public class StarkeVerbenBot extends TelegramLongPollingBot {
     private final BotConfig config;
-    private final MainService mainService;
+    private final TextService textService;
+    private final CallbackService callbackService;
+    private final TextMessageService textMessageService;
+    private final VoiceMessageService voiceMessageService;
 
-    public StarkeVerbenBot(BotConfig config, MainService mainService) {
+    public StarkeVerbenBot(BotConfig config, TextService textService, CallbackService callbackService,
+                           TextMessageService textMessageService, VoiceMessageService voiceMessageService) {
         super(config.getToken());
         this.config = config;
-        this.mainService = mainService;
+        this.textService = textService;
+        this.callbackService = callbackService;
+        this.textMessageService = textMessageService;
+        this.voiceMessageService = voiceMessageService;
     }
 
     @Override
@@ -30,10 +43,27 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        sendToUser(mainService.process(update));
+        try {
+            routeUpdate(update);
+        } catch (Exception exception) {
+            sendApiMethodToUser(List.of(textService.createMessage(update.getMessage().getChatId(), exception.getMessage())));
+        }
     }
 
-    private void sendToUser(List<BotApiMethod> apiMethods) {
+    private void routeUpdate(Update update) {
+        if (update.hasMessage() && isTextMessage(update)) {
+            sendApiMethodToUser(List.of(textMessageService.processTextMessage(update.getMessage())));
+        } else if (update.hasCallbackQuery() && update.getCallbackQuery().getData().contains("voice")) {
+            sendVoiceMessage(voiceMessageService.processVoiceCallback(update.getCallbackQuery()));
+        } else if (update.hasCallbackQuery()) {
+            sendApiMethodToUser(callbackService.processCallbackQuery(update.getCallbackQuery()));
+        } else {
+            log.error("Could not process this message {}", update.getMessage());
+            throw new IllegalStateException("Я не знаю, что мне делать...");
+        }
+    }
+
+    private void sendApiMethodToUser(List<BotApiMethod> apiMethods) {
         apiMethods.forEach(apiMethod -> {
             try {
                 execute(apiMethod);
@@ -42,5 +72,15 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
             }
         });
         log.info("Reply sent");
+    }
+
+    @SneakyThrows
+    private void sendVoiceMessage(SendVoice sendVoice) {
+        execute(sendVoice);
+        log.info("SendMessage sent");
+    }
+
+    private boolean isTextMessage(Update update) {
+        return update.getMessage().hasText();
     }
 }

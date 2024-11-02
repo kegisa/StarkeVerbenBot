@@ -27,7 +27,7 @@ public class TextMessageService {
         Long chatId = message.getChat().getId();
         String messageText = message.getText();
 
-        log.info("Got text message from {}", userName);
+        log.info("Got text message from {}", chatId);
         BotUser user = userService.registrateUser(chatId, userName);
         statisticService.saveRequestToStatistic(user, messageText);
 

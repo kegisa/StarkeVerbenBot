@@ -36,12 +36,15 @@ public class KeyboadService {
     }
 
     public SendMessage addInlineKeyBoardForWord(SendMessage wordMessage, Integer wordId) {
-        InlineKeyboardButton button = InlineKeyboardButton.builder()
+        InlineKeyboardButton markButton = InlineKeyboardButton.builder()
                 .text("Убрать слово! Я запомнил ✅")
                 .callbackData(templateCallbackData.formatted("word", Integer.toString(wordId))).build();
+        InlineKeyboardButton voiceButton = InlineKeyboardButton.builder()
+                .text("Озвучить \uD83D\uDD0A")
+                .callbackData(templateCallbackData.formatted("voiceWord", Integer.toString(wordId))).build();
 
         wordMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
-                .keyboardRow(List.of(button))
+                .keyboard(List.of(List.of(markButton), List.of(voiceButton)))
                 .build());
         return wordMessage;
     }

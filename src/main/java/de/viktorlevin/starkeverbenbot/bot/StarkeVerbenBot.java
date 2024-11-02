@@ -46,7 +46,9 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         try {
             routeUpdate(update);
         } catch (Exception exception) {
-            sendApiMethodToUser(List.of(textService.createMessage(update.getMessage().getChatId(), exception.getMessage())));
+            long chatId = update.getMessage() != null ? update.getMessage().getChatId()
+                    : update.getCallbackQuery().getMessage().getChatId();
+            sendApiMethodToUser(List.of(textService.createMessage(chatId, exception.getMessage())));
         }
     }
 

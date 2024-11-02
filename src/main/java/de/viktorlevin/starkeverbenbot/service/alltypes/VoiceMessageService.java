@@ -1,8 +1,11 @@
 package de.viktorlevin.starkeverbenbot.service.alltypes;
 
+import de.viktorlevin.starkeverbenbot.repository.WortRepository;
 import de.viktorlevin.starkeverbenbot.service.StarkeVerbenService;
+import de.viktorlevin.starkeverbenbot.service.WortService;
 import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
 import de.viktorlevin.starkeverbenbot.service.voice.DownloadVoiceService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,14 +22,18 @@ public class VoiceMessageService {
     private final DownloadVoiceService downloadVoiceService;
     private final MessageService messageService;
     private final StarkeVerbenService starkeVerbenService;
+    private final WortService wortService;
 
 
     public SendVoice processVoiceCallback(CallbackQuery callbackQuery) {
         String id = callbackQuery.getData().split(":")[1];
         if (callbackQuery.getData().contains("Verb")) {
             return getVoiceForVerb(id, callbackQuery.getMessage().getChatId());
+        } else if(callbackQuery.getData().contains("Word")) {
+            return getVoiceWord(id, callbackQuery.getMessage().getChatId());
         } else {
-            return getVoiceWord(id);
+            log.error("Callback voice data was not recognized {}", callbackQuery.getData());
+            throw new IllegalStateException("Что-то пошло не так...");
         }
     }
 
@@ -36,7 +43,18 @@ public class VoiceMessageService {
         return messageService.createVoiceMessage(inputStream, chatId, verb);
     }
 
-    private SendVoice getVoiceWord(String id) {
-        return null;
+    private SendVoice getVoiceWord(String id, Long chatId) {
+        String word = wortService.findWortById(Integer.valueOf(id)).getWord();
+
+        String readyWord = checkAndPrepareWord(word);
+        InputStream inputStream = downloadVoiceService.getVoiceForWord(readyWord);
+        return messageService.createVoiceMessage(inputStream, chatId, word);
+    }
+
+    private String checkAndPrepareWord(String word) {
+        if(word.split(" ").length > 2 || word.contains(".")) {
+            throw new RuntimeException("Не могу озвучить это слово...");
+        }
+        return word.replace("der ", "");
     }
 }

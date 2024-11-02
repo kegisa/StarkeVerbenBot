@@ -66,6 +66,10 @@ public class WortService {
         }
     }
 
+    public Wort findWortById(Integer id) {
+        return wortRepository.findById(id).orElseThrow(() -> new RuntimeException("Что то пошло не так"));
+    }
+
     private void fillLearningWords(long times, BotUser user) {
         for (int i = 0; i < times; i++) {
             wortRepository.getNewWordForLearning(user.getId()).ifPresent(word ->

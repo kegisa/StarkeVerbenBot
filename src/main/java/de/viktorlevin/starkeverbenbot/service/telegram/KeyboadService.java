@@ -37,7 +37,7 @@ public class KeyboadService {
 
     public SendMessage addInlineKeyBoardForWord(SendMessage wordMessage, Integer wordId) {
         InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text("Убрать слово! Я запомнил")
+                .text("Убрать слово! Я запомнил ✅")
                 .callbackData(templateCallbackData.formatted("word", Integer.toString(wordId))).build();
 
         wordMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
@@ -48,10 +48,10 @@ public class KeyboadService {
 
     public SendMessage addInlineKeyBoardForVerb(SendMessage verbMessage, Integer verbId) {
         InlineKeyboardButton markButton = InlineKeyboardButton.builder()
-                .text("Убрать глагол! Я запомнил")
+                .text("Убрать глагол! Я запомнил ✅")
                 .callbackData(templateCallbackData.formatted("verb", Integer.toString(verbId))).build();
         InlineKeyboardButton voiceButton = InlineKeyboardButton.builder()
-                .text("Озвучить")
+                .text("Озвучить \uD83D\uDD0A")
                 .callbackData(templateCallbackData.formatted("voiceVerb", Integer.toString(verbId))).build();
 
         verbMessage.setReplyMarkup(InlineKeyboardMarkup.builder()

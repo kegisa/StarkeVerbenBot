@@ -72,13 +72,13 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
                 throw new RuntimeException(e);
             }
         });
-        log.info("Reply sent");
+        log.info("SendMessage sent");
     }
 
     @SneakyThrows
     private void sendVoiceMessage(SendVoice sendVoice) {
         execute(sendVoice);
-        log.info("SendMessage sent");
+        log.info("Voice message sent");
     }
 
     private boolean isTextMessage(Update update) {

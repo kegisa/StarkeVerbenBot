@@ -24,6 +24,7 @@ public class VoiceMessageService {
 
 
     public SendVoice processVoiceCallback(CallbackQuery callbackQuery) {
+        log.info("Got CallbackVoice message from {} with username {}", callbackQuery.getMessage().getChatId(), callbackQuery.getFrom().getUserName());
         String id = callbackQuery.getData().split(":")[1];
         if (callbackQuery.getData().contains("Verb")) {
             return getVoiceForVerb(id, callbackQuery.getMessage().getChatId());

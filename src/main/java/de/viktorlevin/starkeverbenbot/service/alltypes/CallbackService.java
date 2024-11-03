@@ -24,6 +24,10 @@ public class CallbackService {
     public List<BotApiMethod> processCallbackQuery(CallbackQuery callbackQuery) {
         Long chatId = callbackQuery.getMessage().getChatId();
         Integer messageId = callbackQuery.getMessage().getMessageId();
+        String userName = callbackQuery.getFrom().getUserName();
+
+        log.info("Got Callback message from {} with username {}", chatId, userName);
+
         BotApiMethod callbackResponse = null;
 
         if (callbackQuery.getData().contains("word")) {

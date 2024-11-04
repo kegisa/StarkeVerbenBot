@@ -26,7 +26,7 @@ public class CallbackService {
         Integer messageId = callbackQuery.getMessage().getMessageId();
         String userName = callbackQuery.getFrom().getUserName();
 
-        log.info("Got Callback message from {} with username {}", chatId, userName);
+        log.info("Got Callback message {} from {} with username {}", callbackQuery.getData(), chatId, userName);
 
         BotApiMethod callbackResponse = null;
 

@@ -3,8 +3,10 @@ package de.viktorlevin.starkeverbenbot.bot;
 import de.viktorlevin.starkeverbenbot.configuration.BotConfig;
 import de.viktorlevin.starkeverbenbot.service.TextService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.CallbackService;
+import de.viktorlevin.starkeverbenbot.service.alltypes.ChatService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.TextMessageService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.VoiceMessageService;
+import de.viktorlevin.starkeverbenbot.service.telegram.KeyboadService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,15 +26,20 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
     private final CallbackService callbackService;
     private final TextMessageService textMessageService;
     private final VoiceMessageService voiceMessageService;
+    private final ChatService chatService;
+    private final KeyboadService keyboadService;
 
     public StarkeVerbenBot(BotConfig config, TextService textService, CallbackService callbackService,
-                           TextMessageService textMessageService, VoiceMessageService voiceMessageService) {
+                           TextMessageService textMessageService, VoiceMessageService voiceMessageService,
+                           ChatService chatService, KeyboadService keyboadService) {
         super(config.getToken());
         this.config = config;
         this.textService = textService;
         this.callbackService = callbackService;
         this.textMessageService = textMessageService;
         this.voiceMessageService = voiceMessageService;
+        this.chatService = chatService;
+        this.keyboadService = keyboadService;
     }
 
     @Override
@@ -45,20 +52,28 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         try {
             routeUpdate(update);
         } catch (Exception exception) {
-            log.error(exception.getMessage());
-            long chatId = update.getMessage() != null ? update.getMessage().getChatId()
-                    : update.getCallbackQuery().getMessage().getChatId();
-            sendApiMethodToUser(List.of(textService.createMessage(chatId, exception.getMessage())));
+            log.error(exception.toString());
         }
     }
 
     private void routeUpdate(Update update) {
         if (update.hasMessage() && isTextMessage(update)) {
-            sendApiMethodToUser(List.of(textMessageService.processTextMessage(update.getMessage())));
+            sendApiMethodToUser(List.of(
+                    textMessageService.processTextMessage(update.getMessage())));
         } else if (update.hasCallbackQuery() && update.getCallbackQuery().getData().contains("voice")) {
-            sendVoiceMessage(voiceMessageService.processVoiceCallback(update.getCallbackQuery()));
+            try {
+                sendVoiceMessage(voiceMessageService.processVoiceCallback(update.getCallbackQuery()));
+            } catch (Exception exception) {
+                sendApiMethodToUser(List.of(textService.createMessage(
+                        update.getCallbackQuery().getMessage().getChatId(),
+                        exception.getMessage())));
+            }
         } else if (update.hasCallbackQuery()) {
             sendApiMethodToUser(callbackService.processCallbackQuery(update.getCallbackQuery()));
+        } else if (update.hasMyChatMember()) {
+            sendApiMethodToUser(chatService.processChatMemberMessage(update.getMyChatMember()));
+        } else if (update.hasMessage() && update.getMessage().getLeftChatMember() != null) {
+            chatService.oneMemberLeft(update.getMessage());
         } else {
             log.error("Could not process this message {}", update);
             throw new IllegalStateException("Я не знаю, что мне делать...");

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -33,5 +34,9 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<BotUser> getUsers() {
         return userRepository.findAll();
+    }
+
+    public Optional<BotUser> findByChatId(Long chatId) {
+        return userRepository.findByChatId(chatId);
     }
 }

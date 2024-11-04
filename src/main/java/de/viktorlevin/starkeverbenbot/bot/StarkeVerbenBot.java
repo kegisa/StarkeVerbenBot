@@ -60,7 +60,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             sendApiMethodToUser(callbackService.processCallbackQuery(update.getCallbackQuery()));
         } else {
-            log.error("Could not process this message {}", update.getMessage());
+            log.error("Could not process this message {}", update);
             throw new IllegalStateException("Я не знаю, что мне делать...");
         }
     }

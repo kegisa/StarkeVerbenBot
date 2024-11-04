@@ -30,9 +30,9 @@ public class VoiceMessageService {
                 callbackQuery.getFrom().getUserName());
 
         String id = callbackQuery.getData().split(":")[1];
-        if (callbackQuery.getData().contains("Verb")) {
+        if (callbackQuery.getData().contains("voiceVerb")) {
             return getVoiceForVerb(id, callbackQuery.getMessage().getChatId());
-        } else if (callbackQuery.getData().contains("Word")) {
+        } else if (callbackQuery.getData().contains("voiceWord")) {
             return getVoiceWord(id, callbackQuery.getMessage().getChatId());
         } else {
             log.error("Callback voice data was not recognized {}", callbackQuery.getData());

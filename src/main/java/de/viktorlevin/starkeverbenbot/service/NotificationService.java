@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Slf4j
@@ -26,7 +28,8 @@ public class NotificationService {
 
     @Transactional(readOnly = true)
     public List<BotUser> getUsersWithoutActivity(long millsWithoutActivity) {
-        return userRepository.getUsersWithoutActivityAndRecentNotification(millsWithoutActivity);
+        return userRepository.getUsersWithoutActivityAndRecentNotification(
+                OffsetDateTime.now().minus(millsWithoutActivity, ChronoUnit.MILLIS));
     }
 
 

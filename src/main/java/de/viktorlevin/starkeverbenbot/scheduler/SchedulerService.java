@@ -22,7 +22,7 @@ public class SchedulerService {
     @Value("${notifications.activity}")
     private long millsWithoutActivity;
 
-    @Scheduled(fixedDelay = 300_000, initialDelay = 10_000)
+    @Scheduled(fixedDelay = 30000, initialDelay = 10_000)
     public void sendNotificationAboutActivity() {
         log.info("Getting users for sending notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);

@@ -27,6 +27,9 @@ public class BotUser {
     @CreationTimestamp
     private OffsetDateTime registrationDate;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     public BotUser(String username, Long chatId) {
         this.username = username;
         this.chatId = chatId;

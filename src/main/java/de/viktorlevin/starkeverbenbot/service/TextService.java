@@ -55,6 +55,11 @@ public class TextService {
             /einwort
             """;
 
+    private static final String NOTIFICATION_INACTIVITY = """
+            Лучше учить слова по-немногому и часто. Даже два слова в день дадут большой результат через время.
+            Давай попробуем!
+            """;
+
     public SendMessage startBot(Long chatId) {
         return messageService.createMessage(chatId, BEKOMMEN_HELP);
     }
@@ -125,6 +130,10 @@ public class TextService {
 
     public BotApiMethod createMessageForGroup(Long chatId) {
         return messageService.createMessage(chatId, MESSAGE_FOR_GROUP);
+    }
+
+    public SendMessage createActivityNotification(Long chatId) {
+        return createMessage(chatId, NOTIFICATION_INACTIVITY);
     }
 }
 

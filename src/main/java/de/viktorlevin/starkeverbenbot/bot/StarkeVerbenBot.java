@@ -78,7 +78,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         }
     }
 
-    private void sendApiMethodToUser(List<BotApiMethod> apiMethods) {
+    public void sendApiMethodToUser(List<BotApiMethod> apiMethods) {
         apiMethods.forEach(apiMethod -> {
             try {
                 execute(apiMethod);
@@ -90,7 +90,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
     }
 
     @SneakyThrows
-    private void sendVoiceMessage(SendVoice sendVoice) {
+    public void sendVoiceMessage(SendVoice sendVoice) {
         execute(sendVoice);
         log.info("Voice message sent");
     }

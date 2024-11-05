@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: levin
+      changes:
+        - addColumn:
+            tableName: bot_users
+            columns:
+              - column:
+                  name: is_active
+                  type: boolean
+                  defaultValue: true
+                  constraints:
+                    nullable: false

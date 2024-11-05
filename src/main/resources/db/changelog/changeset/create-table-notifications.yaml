@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 11
+      author: levin
+      changes:
+        - createTable:
+            tableName: notification
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_id_fk
+                    referencedTableName: bot_users
+                    referencedColumnNames: id
+              - column:
+                  name: sent_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: smallint
+                  constraints:
+                    nullable: false
+
+          addPrimaryKey:
+            columnNames: id
+            tableName: notification

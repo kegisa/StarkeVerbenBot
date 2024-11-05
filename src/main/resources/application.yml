@@ -15,6 +15,9 @@ bot:
 download-voice-api:
   url: ${VOICE_DOWNLOADER_URL}
 
+notifications:
+  activity: ${NOTIFICATIONS_ACTIVITY:172800000}
+
 words:
   wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}
 verbs:

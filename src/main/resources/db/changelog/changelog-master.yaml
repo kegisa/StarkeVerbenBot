@@ -19,3 +19,7 @@ databaseChangeLog:
       file: db/changelog/changeset/add-column-learned-words.yaml
   - include:
       file: db/changelog/changeset/create-table-learned-verben.yaml
+  - include:
+      file: db/changelog/changeset/create-table-notifications.yaml
+  - include:
+      file: db/changelog/changeset/add-column-bot-users.yaml

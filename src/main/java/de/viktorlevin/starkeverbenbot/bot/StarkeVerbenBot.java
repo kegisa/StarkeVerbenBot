@@ -53,6 +53,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
             routeUpdate(update);
         } catch (Exception exception) {
             log.error(exception.toString());
+            log.info(update.toString());
         }
     }
 

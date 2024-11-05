@@ -1,9 +1,7 @@
 package de.viktorlevin.starkeverbenbot.scheduler;
 
-import de.viktorlevin.starkeverbenbot.bot.StarkeVerbenBot;
 import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.service.NotificationService;
-import de.viktorlevin.starkeverbenbot.service.StatisticService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +20,7 @@ public class SchedulerService {
     @Value("${notifications.activity}")
     private long millsWithoutActivity;
 
-    @Scheduled(fixedDelay = 30000, initialDelay = 10_000)
+    @Scheduled(fixedDelay = 120_000, initialDelay = 10_000)
     public void sendNotificationAboutActivity() {
         log.info("Getting users for sending notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);

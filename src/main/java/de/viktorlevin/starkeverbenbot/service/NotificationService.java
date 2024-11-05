@@ -46,6 +46,7 @@ public class NotificationService {
             userService.markUserAsInactive(user);
         }
     }
+
     private void sendAndSaveNotification(BotUser user) {
         SendMessage sendMessage = textService.createActivityNotification(user.getChatId());
         bot.sendApiMethodToUser(List.of(sendMessage));

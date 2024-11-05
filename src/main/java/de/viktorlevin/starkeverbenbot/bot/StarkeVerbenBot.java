@@ -6,7 +6,6 @@ import de.viktorlevin.starkeverbenbot.service.alltypes.CallbackService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.ChatService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.TextMessageService;
 import de.viktorlevin.starkeverbenbot.service.alltypes.VoiceMessageService;
-import de.viktorlevin.starkeverbenbot.service.telegram.KeyboadService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,11 +26,10 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
     private final TextMessageService textMessageService;
     private final VoiceMessageService voiceMessageService;
     private final ChatService chatService;
-    private final KeyboadService keyboadService;
 
     public StarkeVerbenBot(BotConfig config, TextService textService, CallbackService callbackService,
                            TextMessageService textMessageService, VoiceMessageService voiceMessageService,
-                           ChatService chatService, KeyboadService keyboadService) {
+                           ChatService chatService) {
         super(config.getToken());
         this.config = config;
         this.textService = textService;
@@ -39,7 +37,6 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         this.textMessageService = textMessageService;
         this.voiceMessageService = voiceMessageService;
         this.chatService = chatService;
-        this.keyboadService = keyboadService;
     }
 
     @Override

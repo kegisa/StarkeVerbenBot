@@ -20,7 +20,7 @@ public class SchedulerService {
     @Value("${notifications.activity}")
     private long millsWithoutActivity;
 
-    @Scheduled(cron = "* 9-20 * * *")
+    @Scheduled(cron = "0 * 9-20 * * *")
     public void sendNotificationAboutActivity() {
         log.info("Getting users for sending notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);

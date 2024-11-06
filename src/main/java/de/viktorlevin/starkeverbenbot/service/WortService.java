@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -23,18 +24,25 @@ public class WortService {
 
     @Value("${words.wordsAtTheMoment}")
     private Long wordsAtTheMoment;
+    private final Random random = new Random();
 
     @Transactional
     public Wort getRandomWort(BotUser user) {
-        LearnedWort randomWort = learnedWordsRepository.getRandomWort(user.getId())
-                .orElseGet(() -> {
-                    if (learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED) == 0) {
-                        initializeLearningProcess(user);
-                        return learnedWordsRepository.getRandomWort(user.getId()).get();
-                    }
-                    throw new IllegalStateException("Вы выучили все слова из списка!");
-                });
-        return randomWort.getWort();
+        List<LearnedWort> wordsInProcess = learnedWordsRepository.findAllByUserAndStatus(
+                user, LearnedWort.Status.IN_PROGRESS);
+        if (wordsInProcess == null || wordsInProcess.isEmpty()) {
+            if (learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED) == 0) {
+                initializeLearningProcess(user);
+                return getRandomWortFromList(learnedWordsRepository.findAllByUserAndStatus(user, LearnedWort.Status.IN_PROGRESS));
+            }
+            throw new IllegalStateException("Вы выучили все слова из списка!\uD83C\uDFC6 Таких пользователей очень мало, поздравляю! \uD83C\uDF89 В ближайшее время я добавлю Вам еще 2000 слов в Ваш словарь\uD83D\uDCDA. Спасибо, что пользуетесь!\uD83D\uDD25");
+        } else {
+            return getRandomWortFromList(wordsInProcess);
+        }
+    }
+
+    private Wort getRandomWortFromList(List<LearnedWort> words) {
+        return words.get(random.nextInt(words.size())).getWort();
     }
 
     @Transactional

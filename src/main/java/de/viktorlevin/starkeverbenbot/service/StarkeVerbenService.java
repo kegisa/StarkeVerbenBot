@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -23,18 +24,25 @@ public class StarkeVerbenService {
 
     @Value("${verbs.verbsAtTheMoment}")
     private Long verbsAtTheMoment;
+    private final Random random = new Random();
 
     @Transactional
     public StarkesVerb getRandomStarkesVerb(BotUser user) {
-        LearnedStarkesVerb randomStarkesVerb = learnedStarkeVerbenRepository.getRandomStarkesVerb(user.getId())
-                .orElseGet(() -> {
-                    if (learnedStarkeVerbenRepository.countByUserAndStatus(user, LearnedStarkesVerb.Status.FINISHED) == 0) {
-                        initializeLearningProcess(user);
-                        return learnedStarkeVerbenRepository.getRandomStarkesVerb(user.getId()).get();
-                    }
-                    throw new IllegalStateException("Вы выучили все сильные глаголы из списка!");
-                });
-        return randomStarkesVerb.getVerb();
+        List<LearnedStarkesVerb> verbsInProcess = learnedStarkeVerbenRepository.findAllByUserAndStatus(
+                user, LearnedStarkesVerb.Status.IN_PROGRESS);
+        if (verbsInProcess == null || verbsInProcess.isEmpty()) {
+            if (learnedStarkeVerbenRepository.countByUserAndStatus(user, LearnedStarkesVerb.Status.FINISHED) == 0) {
+                initializeLearningProcess(user);
+                return getRandomVerbFromList(learnedStarkeVerbenRepository.findAllByUserAndStatus(user, LearnedStarkesVerb.Status.IN_PROGRESS));
+            }
+            throw new IllegalStateException("Вы выучили все сильные глаголы из списка!\uD83C\uDFC6  Таких пользователей очень мало, поздравляю!\uD83C\uDF89");
+        } else {
+            return getRandomVerbFromList(verbsInProcess);
+        }
+    }
+
+    private StarkesVerb getRandomVerbFromList(List<LearnedStarkesVerb> verbs) {
+        return verbs.get(random.nextInt(verbs.size())).getVerb();
     }
 
     @Transactional

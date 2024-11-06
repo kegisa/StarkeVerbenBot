@@ -2,6 +2,7 @@ package de.viktorlevin.starkeverbenbot.repository;
 
 import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.entity.LearnedStarkesVerb;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface LearnedStarkeVerbenRepository extends JpaRepository<LearnedStar
 
     Optional<LearnedStarkesVerb> findByUserAndVerb_Id(BotUser user, Integer verbId);
 
+    @EntityGraph(attributePaths = {"verb"})
     List<LearnedStarkesVerb> findAllByUserAndStatus(BotUser user, LearnedStarkesVerb.Status status);
 }
 

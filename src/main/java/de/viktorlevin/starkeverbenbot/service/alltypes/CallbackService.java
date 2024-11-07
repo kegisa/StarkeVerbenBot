@@ -1,9 +1,6 @@
 package de.viktorlevin.starkeverbenbot.service.alltypes;
 
-import de.viktorlevin.starkeverbenbot.service.StarkeVerbenService;
-import de.viktorlevin.starkeverbenbot.service.TextService;
-import de.viktorlevin.starkeverbenbot.service.WortService;
-import de.viktorlevin.starkeverbenbot.service.telegram.KeyboadService;
+import de.viktorlevin.starkeverbenbot.service.*;
 import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +18,8 @@ public class CallbackService {
     private final TextService textService;
     private final StarkeVerbenService starkeVerbenService;
     private final MessageService messageService;
-    private final KeyboadService keyboadService;
+    private final UserService userService;
+    private final StatisticService statisticService;
 
     public List<BotApiMethod> processCallbackQuery(CallbackQuery callbackQuery) {
         Long chatId = callbackQuery.getMessage().getChatId();
@@ -30,7 +28,7 @@ public class CallbackService {
         try {
 
             log.info("Got Callback message {} from {} with username {}", callbackQuery.getData(), chatId, userName);
-
+            statisticService.saveRequestToStatistic(userService.registrateUser(chatId, userName), callbackQuery.getData());
             BotApiMethod callbackResponse = null;
 
             if (callbackQuery.getData().contains("word")) {

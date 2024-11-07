@@ -1,6 +1,8 @@
 package de.viktorlevin.starkeverbenbot.service.alltypes;
 
 import de.viktorlevin.starkeverbenbot.service.StarkeVerbenService;
+import de.viktorlevin.starkeverbenbot.service.StatisticService;
+import de.viktorlevin.starkeverbenbot.service.UserService;
 import de.viktorlevin.starkeverbenbot.service.WortService;
 import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
 import de.viktorlevin.starkeverbenbot.service.voice.DownloadVoiceService;
@@ -21,13 +23,17 @@ public class VoiceMessageService {
     private final MessageService messageService;
     private final StarkeVerbenService starkeVerbenService;
     private final WortService wortService;
+    private final StatisticService statisticService;
+    private final UserService userService;
 
 
     public SendVoice processVoiceCallback(CallbackQuery callbackQuery) {
+        Long chatId = callbackQuery.getMessage().getChatId();
+        String username = callbackQuery.getFrom().getUserName();
+
         log.info("Got CallbackVoice message {} from {} with username {}",
-                callbackQuery.getData(),
-                callbackQuery.getMessage().getChatId(),
-                callbackQuery.getFrom().getUserName());
+                callbackQuery.getData(), chatId, username);
+        statisticService.saveRequestToStatistic(userService.registrateUser(chatId, username), callbackQuery.getData());
 
         String id = callbackQuery.getData().split(":")[1];
         if (callbackQuery.getData().contains("voiceVerb")) {

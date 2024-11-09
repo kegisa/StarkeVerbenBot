@@ -24,6 +24,8 @@ public class NotificationService {
     private final TextService textService;
     private final UserRepository userRepository;
     private final UserService userService;
+    private final StarkeVerbenService starkeVerbenService;
+    private final WortService wortService;
 
 
     @Transactional(readOnly = true)
@@ -34,24 +36,57 @@ public class NotificationService {
 
 
     @Transactional
-    public void sendNotifications(List<BotUser> users) {
-        users.stream().forEach(this::sendNotification);
+    public void sendActivityNotifications(List<BotUser> users) {
+        users.stream().parallel().forEach(this::sendActivityNotification);
     }
 
-    private void sendNotification(BotUser user) {
+    @Transactional
+    public void sendTopNotifications(List<BotUser> users, int topsize) {
+        users.forEach(user -> sendTopNotification(user, topsize));
+    }
+
+    private void sendTopNotification(BotUser user, int topSize) {
         try {
-            sendAndSaveNotification(user);
+            sendAndSaveTopNotification(user, topSize);
         } catch (Exception exception) {
             log.error("Error during sending notification to user {}", user.getId(), exception);
             userService.markUserAsInactive(user);
         }
     }
 
-    private void sendAndSaveNotification(BotUser user) {
-        SendMessage sendMessage = textService.createActivityNotification(user.getChatId());
-        bot.sendApiMethodToUser(List.of(sendMessage));
-        notificationRepository.save(new Notification(user, Notification.Type.ACTIVITY));
+    private void sendAndSaveTopNotification(BotUser user, int topSize) {
+        long quantityOfVerbs = starkeVerbenService.getQuantityOfLearnedVerbs(user);
+        long quantityOfWords = wortService.getQuantityOfLearnedWords(user);
+        SendMessage sendMessage = textService.createTopNotification(
+                user.getChatId(),
+                quantityOfVerbs,
+                quantityOfWords,
+                topSize
+        );
+        sendNotificationThroughBot(sendMessage, user, Notification.Type.RATING);
     }
 
+    private void sendActivityNotification(BotUser user) {
+        try {
+            sendAndSaveActiveNotification(user);
+        } catch (Exception exception) {
+            log.error("Error during sending notification to user {}", user.getId(), exception);
+            userService.markUserAsInactive(user);
+        }
+    }
 
+    private void sendAndSaveActiveNotification(BotUser user) {
+        SendMessage sendMessage = textService.createActivityNotification(user.getChatId());
+        sendNotificationThroughBot(sendMessage, user, Notification.Type.ACTIVITY);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BotUser> getTopActiveUsersForLastNHours(int topSize, int lastHours) {
+        return userRepository.getTopActiveUsers(topSize);
+    }
+
+    private void sendNotificationThroughBot(SendMessage sendMessage, BotUser user, Notification.Type type) {
+        bot.sendApiMethodToUser(List.of(sendMessage));
+        notificationRepository.save(new Notification(user, type));
+    }
 }

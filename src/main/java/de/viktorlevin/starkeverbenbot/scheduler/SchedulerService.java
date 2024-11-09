@@ -19,13 +19,27 @@ public class SchedulerService {
 
     @Value("${notifications.activity}")
     private long millsWithoutActivity;
+    @Value("${notifications.top.time}")
+    private int lastHours;
+    @Value("${notifications.top.size}")
+    private int topSize;
 
     @Scheduled(cron = "0 * 8-20 * * *")
     public void sendNotificationAboutActivity() {
         log.info("Getting users for sending notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);
         log.info("{} users were received for notifications", users.size());
-        notificationService.sendNotifications(users);
+        notificationService.sendActivityNotifications(users);
         log.info("Notifications were successfully sent");
+    }
+
+    //0 0 13 * * 7
+    @Scheduled(cron = "0 * 8-20 * * *")
+    public void sendNotificationAboutLastWeek() {
+        log.info("Getting users for sending top notification");
+        List<BotUser> users = notificationService.getTopActiveUsersForLastNHours(topSize, lastHours);
+        log.info("{} users were received for top notification", users.size());
+        notificationService.sendTopNotifications(users, topSize);
+        log.info("Top notifications were successfully sent");
     }
 }

@@ -1,6 +1,7 @@
 package de.viktorlevin.starkeverbenbot.service;
 
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
+import de.viktorlevin.starkeverbenbot.entity.UserStatistic;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
 import de.viktorlevin.starkeverbenbot.service.telegram.MessageService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class TextService {
+
     private final MessageService messageService;
     private static final Random random = new Random();
     private final String BEKOMMEN_HELP = """
@@ -58,6 +60,22 @@ public class TextService {
     private static final String NOTIFICATION_INACTIVITY = """
             Привет! 👋
             Не забывай про регулярность — 5 минут в день помогут тебе быстрее выучить новые слова. Успех близко! 💪
+            """;
+    private static final String TOP_RATING_MESSAGE = """
+            🎉 Вы входите в топ %d пользователей бота по выученным словам и глаголам!
+                        
+            📚 Всего слов выучено: %d из 1080.
+            💪 Всего сильных глаголов выучено: %d из 172.
+            🚀 Не останавливайтесь на достигнутом! Вы на правильном пути к совершенству! 🌟
+                        
+            Данную статистику всегда можно получить по команде /statistic. 
+            """;
+
+    private static final String STATISTIC_MESSAGE = """         
+            📚 Всего слов выучено: %d из 1080.
+            💪 Всего сильных глаголов выучено: %d из 172.
+            🤖 Запросов в бот всего %d
+            🚀 Не останавливайтесь на достигнутом! Вы на правильном пути к совершенству!
             """;
 
     public SendMessage startBot(Long chatId) {
@@ -134,6 +152,17 @@ public class TextService {
 
     public SendMessage createActivityNotification(Long chatId) {
         return createMessage(chatId, NOTIFICATION_INACTIVITY);
+    }
+
+    public SendMessage createTopNotification(Long chatId, long quantityOfVerbs, long quantityOfWords, int topSize) {
+        return createMessage(chatId, TOP_RATING_MESSAGE.formatted(topSize, quantityOfWords, quantityOfVerbs));
+    }
+
+    public SendMessage statisticMessage(UserStatistic statistic) {
+        return createMessage(statistic.getChatId(),
+                STATISTIC_MESSAGE.formatted(statistic.getLearnedWords(),
+                        statistic.getLearnedStarkesVerbs(),
+                        statistic.getRequests()));
     }
 }
 

@@ -85,4 +85,8 @@ public class WortService {
             );
         }
     }
+
+    public long getQuantityOfLearnedWords(BotUser user) {
+        return learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED);
+    }
 }

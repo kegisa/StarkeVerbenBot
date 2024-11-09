@@ -86,4 +86,8 @@ public class StarkeVerbenService {
             );
         }
     }
+
+    public long getQuantityOfLearnedVerbs(BotUser user) {
+        return learnedStarkeVerbenRepository.countByUserAndStatus(user, LearnedStarkesVerb.Status.FINISHED);
+    }
 }

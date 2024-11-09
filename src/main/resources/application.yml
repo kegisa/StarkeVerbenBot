@@ -17,6 +17,9 @@ download-voice-api:
 
 notifications:
   activity: ${NOTIFICATIONS_ACTIVITY:259200000}
+  top:
+    time: ${NOTIFICATIONS_TOP_TIME:157}
+    size: ${NOTIFICATIONS_TOP_SIZE:5}
 
 words:
   wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}

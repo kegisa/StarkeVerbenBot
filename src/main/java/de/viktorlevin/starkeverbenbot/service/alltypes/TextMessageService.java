@@ -2,6 +2,7 @@ package de.viktorlevin.starkeverbenbot.service.alltypes;
 
 import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
+import de.viktorlevin.starkeverbenbot.entity.UserStatistic;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
 import de.viktorlevin.starkeverbenbot.service.*;
 import de.viktorlevin.starkeverbenbot.service.telegram.KeyboadService;
@@ -48,6 +49,9 @@ public class TextMessageService {
                     Wort wort = wortService.getRandomWort(user);
                     SendMessage wordMessage = textService.generateWort(wort, chatId);
                     return keyboadService.addInlineKeyBoardForWord(wordMessage, wort.getId());
+                case "/statistic":
+                    UserStatistic statistic = statisticService.getUserStatistic(user);
+                    return textService.statisticMessage(statistic);
                 default:
                     throw new IllegalStateException("Я не понимаю, что мне делать...");
             }

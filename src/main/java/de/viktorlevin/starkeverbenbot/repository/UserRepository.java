@@ -19,5 +19,12 @@ public interface UserRepository extends JpaRepository<BotUser, Integer> {
             "          AND (max(n.sent_at) < ?1 OR max(n.sent_at) is null))) AND bot_users.is_active = true;",
             nativeQuery = true)
     List<BotUser> getUsersWithoutActivityAndRecentNotification(OffsetDateTime now);
+
+    @Query(value = "select bu.* from bot_users bu " +
+            "left join (select lw.user_id, count(*) words from learned_words lw where lw.status = 1 group by lw.user_id) as words on bu.id = words.user_id " +
+            "left join (select lv.user_id, count(*) verbs from learned_starke_verben lv where lv.status = 1 group by lv.user_id) as verbs on bu.id = verbs.user_id " +
+            "where bu.is_active = true and bu.username = 'kegisa' " +
+            "order by COALESCE(words.words, 0) + COALESCE(verbs.verbs, 0) desc limit ?1;", nativeQuery = true)
+    List<BotUser> getTopActiveUsers(int topSize);
 }
 

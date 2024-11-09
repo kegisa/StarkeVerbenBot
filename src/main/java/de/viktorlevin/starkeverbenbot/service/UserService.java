@@ -26,10 +26,17 @@ public class UserService {
             return cachedUsers.get(chatId);
         }
 
-        BotUser user = userRepository.findByChatId(chatId)
-                .orElseGet(() -> userRepository.save(new BotUser(userName, chatId)));
-        cachedUsers.put(chatId, user);
-        return user;
+        Optional<BotUser> optUser = userRepository.findByChatId(chatId);
+        BotUser botUser = null;
+
+        if (optUser.isPresent()) {
+            botUser = optUser.get();
+            botUser.setActive(true);
+        } else {
+            botUser = userRepository.save(new BotUser(userName, chatId));
+        }
+        cachedUsers.put(chatId, botUser);
+        return botUser;
     }
 
     @Transactional(readOnly = true)
@@ -43,6 +50,7 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void markUserAsInactive(BotUser user) {
+        cachedUsers.remove(user.getChatId());
         user.setActive(false);
         userRepository.save(user);
     }

@@ -26,9 +26,9 @@ public class SchedulerService {
 
     @Scheduled(cron = "0 * 8-20 * * *")
     public void sendNotificationAboutActivity() {
-        log.info("Getting users for sending notifications");
+        log.info("Getting users for sending activity notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);
-        log.info("{} users were received for notifications", users.size());
+        log.info("{} users were received for activity notifications", users.size());
         notificationService.sendActivityNotifications(users);
         log.info("Notifications were successfully sent");
     }

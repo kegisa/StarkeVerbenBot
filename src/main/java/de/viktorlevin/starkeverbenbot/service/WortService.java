@@ -87,6 +87,7 @@ public class WortService {
     }
 
     public long getQuantityOfLearnedWords(BotUser user) {
+        log.info("Getting quantity of learned words for chatId {} and username {}", user.getChatId(), user.getUsername());
         return learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED);
     }
 }

@@ -42,6 +42,7 @@ public class NotificationService {
 
     @Transactional
     public void sendTopNotifications(List<BotUser> users, int topsize) {
+        log.info("Started process for sending top notifications to {} users", users.size());
         users.forEach(user -> sendTopNotification(user, topsize));
     }
 
@@ -49,7 +50,7 @@ public class NotificationService {
         try {
             sendAndSaveTopNotification(user, topSize);
         } catch (Exception exception) {
-            log.error("Error during sending notification to user {}", user.getId(), exception);
+            log.error("Error during sending notification to user {}", user.getChatId(), exception);
             userService.markUserAsInactive(user);
         }
     }
@@ -70,7 +71,7 @@ public class NotificationService {
         try {
             sendAndSaveActiveNotification(user);
         } catch (Exception exception) {
-            log.error("Error during sending notification to user {}", user.getId(), exception);
+            log.error("Error during sending notification to user {}", user.getChatId(), exception);
             userService.markUserAsInactive(user);
         }
     }
@@ -82,11 +83,14 @@ public class NotificationService {
 
     @Transactional(readOnly = true)
     public List<BotUser> getTopActiveUsersForLastNHours(int topSize, int lastHours) {
+        log.info("Getting top {} active users", topSize);
         return userRepository.getTopActiveUsers(topSize);
     }
 
     private void sendNotificationThroughBot(SendMessage sendMessage, BotUser user, Notification.Type type) {
+        log.info("Trying to send notification to user with chatId {}  with notification type {}", user.getChatId(), type);
         bot.sendApiMethodToUser(List.of(sendMessage));
         notificationRepository.save(new Notification(user, type));
+        log.info("Notification {} sent successfully to user with chatId {}", type, user.getChatId());
     }
 }

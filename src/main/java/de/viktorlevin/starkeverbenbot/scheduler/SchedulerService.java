@@ -33,8 +33,7 @@ public class SchedulerService {
         log.info("Notifications were successfully sent");
     }
 
-    //0 0 13 * * 7
-    @Scheduled(cron = "0 * 8-20 * * *")
+    @Scheduled(cron = "0 0 13 * * 7")
     public void sendNotificationAboutLastWeek() {
         log.info("Getting users for sending top notification");
         List<BotUser> users = notificationService.getTopActiveUsersForLastNHours(topSize, lastHours);

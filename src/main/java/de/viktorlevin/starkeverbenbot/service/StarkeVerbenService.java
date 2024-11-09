@@ -88,6 +88,7 @@ public class StarkeVerbenService {
     }
 
     public long getQuantityOfLearnedVerbs(BotUser user) {
+        log.info("Getting quantity of learned verbs for chatId {} with username {}", user.getChatId(), user.getUsername());
         return learnedStarkeVerbenRepository.countByUserAndStatus(user, LearnedStarkesVerb.Status.FINISHED);
     }
 }

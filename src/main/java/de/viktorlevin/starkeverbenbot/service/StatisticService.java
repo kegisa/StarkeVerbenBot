@@ -24,6 +24,7 @@ public class StatisticService {
     }
 
     public UserStatistic getUserStatistic(BotUser user) {
+        log.info("Getting user statistic for chatId {} and username {}", user.getChatId(), user.getUsername());
         return UserStatistic.builder()
                 .chatId(user.getChatId())
                 .learnedWords(wortService.getQuantityOfLearnedWords(user))

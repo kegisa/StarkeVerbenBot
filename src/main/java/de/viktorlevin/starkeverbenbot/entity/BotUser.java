@@ -33,5 +33,6 @@ public class BotUser {
     public BotUser(String username, Long chatId) {
         this.username = username;
         this.chatId = chatId;
+        this.isActive = true;
     }
 }

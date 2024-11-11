@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: levin
+      changes:
+        - addColumn:
+            tableName: learned_starke_verben
+            columns:
+              - column:
+                  name: updated_at
+                  type: datetime

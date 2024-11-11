@@ -3,6 +3,9 @@ package de.viktorlevin.starkeverbenbot.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -24,6 +27,9 @@ public class LearnedStarkesVerb {
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 
     public LearnedStarkesVerb(BotUser user, StarkesVerb verb, Status status) {
         this.user = user;

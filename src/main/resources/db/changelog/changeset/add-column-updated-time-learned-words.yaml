@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 13
+      author: levin
+      changes:
+        - addColumn:
+            tableName: learned_words
+            columns:
+              - column:
+                  name: updated_at
+                  type: datetime

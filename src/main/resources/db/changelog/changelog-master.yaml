@@ -23,3 +23,7 @@ databaseChangeLog:
       file: db/changelog/changeset/create-table-notifications.yaml
   - include:
       file: db/changelog/changeset/add-column-bot-users.yaml
+  - include:
+      file: db/changelog/changeset/add-column-updated-time-learned-words.yaml
+  - include:
+      file: db/changelog/changeset/add-column-updated-time-learned-verbs.yaml

@@ -4,3 +4,7 @@ metadata:
   name: starke-verben-bot-local-configmap
 data:
   SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5433/starke-db
+  WORDS_AT_THE_MOMENT: "20"
+  VERBS_AT_THE_MOMENT: "20"
+  VOICE_DOWNLOADER_URL: voice-downloader-service
+  NOTIFICATIONS_ACTIVITY: "259200000"

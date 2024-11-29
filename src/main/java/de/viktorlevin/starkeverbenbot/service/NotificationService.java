@@ -42,23 +42,23 @@ public class NotificationService {
     }
 
     @Transactional
-    public void sendTopNotifications(List<BotUser> users, int topsize) {
+    public void sendTopNotifications(List<BotUser> users, int topsize, int nHours) {
         log.info("Started process for sending top notifications to {} users", users.size());
-        users.forEach(user -> sendTopNotification(user, topsize));
+        users.forEach(user -> sendTopNotification(user, topsize, nHours));
     }
 
-    private void sendTopNotification(BotUser user, int topSize) {
+    private void sendTopNotification(BotUser user, int topSize, int nHours) {
         try {
-            sendAndSaveTopNotification(user, topSize);
+            sendAndSaveTopNotification(user, topSize, nHours);
         } catch (Exception exception) {
             log.error("Error during sending notification to user {}", user.getChatId(), exception);
             userService.markUserAsInactive(user);
         }
     }
 
-    private void sendAndSaveTopNotification(BotUser user, int topSize) {
-        long quantityOfVerbs = starkeVerbenService.getQuantityOfLearnedVerbs(user);
-        long quantityOfWords = wortService.getQuantityOfLearnedWords(user);
+    private void sendAndSaveTopNotification(BotUser user, int topSize, int nHours) {
+        long quantityOfVerbs = starkeVerbenService.getQuantityOfLearnedVerbsForLastNHours(user, nHours);
+        long quantityOfWords = wortService.getQuantityOfLearnedWordsForLastNHours(user, nHours);
         SendMessage sendMessage = textService.createTopNotification(
                 user.getChatId(),
                 quantityOfVerbs,
@@ -86,7 +86,7 @@ public class NotificationService {
     @Transactional(readOnly = true)
     public List<BotUser> getTopActiveUsersForLastNHours(int topSize, int lastHours) {
         log.info("Getting top {} active users", topSize);
-        return userRepository.getTopActiveUsers(topSize);
+        return userRepository.getTopActiveUsers(topSize, lastHours);
     }
 
     private void sendNotificationThroughBot(SendMessage sendMessage, BotUser user, Notification.Type type) {

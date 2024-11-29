@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Slf4j
@@ -90,5 +91,11 @@ public class StarkeVerbenService {
     public long getQuantityOfLearnedVerbs(BotUser user) {
         log.info("Getting quantity of learned verbs for chatId {} with username {}", user.getChatId(), user.getUsername());
         return learnedStarkeVerbenRepository.countByUserAndStatus(user, LearnedStarkesVerb.Status.FINISHED);
+    }
+
+    public long getQuantityOfLearnedVerbsForLastNHours(BotUser user, int nHours) {
+        log.info("Getting quantity of learned verbs for chatId {} with username {} for last {} hours", user.getChatId(), user.getUsername(), nHours);
+        Long count = learnedStarkeVerbenRepository.countByUserAndStatusForLastNHours(user.getId(), nHours);
+        return Objects.isNull(count) ? 0 : count;
     }
 }

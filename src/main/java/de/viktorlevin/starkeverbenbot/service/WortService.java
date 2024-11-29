@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Slf4j
@@ -89,5 +90,11 @@ public class WortService {
     public long getQuantityOfLearnedWords(BotUser user) {
         log.info("Getting quantity of learned words for chatId {} and username {}", user.getChatId(), user.getUsername());
         return learnedWordsRepository.countByUserAndStatus(user, LearnedWort.Status.FINISHED);
+    }
+
+    public long getQuantityOfLearnedWordsForLastNHours(BotUser user, int nHours) {
+        log.info("Getting quantity of learned words for chatId {} and username {} for last {} hours", user.getChatId(), user.getUsername(), nHours);
+        Long count = learnedWordsRepository.countByUserAndStatusForLastNHours(user.getId(), nHours);
+        return Objects.isNull(count) ? 0 : count;
     }
 }

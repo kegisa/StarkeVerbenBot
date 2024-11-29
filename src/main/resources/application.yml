@@ -17,9 +17,11 @@ download-voice-api:
 
 notifications:
   activity: ${NOTIFICATIONS_ACTIVITY:259200000}
+  cron: "0 * 8-20 * * *"
   top:
-    time: ${NOTIFICATIONS_TOP_TIME:157}
-    size: ${NOTIFICATIONS_TOP_SIZE:5}
+    cron: "0 0 13 * * 7"
+    time: ${NOTIFICATIONS_TOP_TIME:168}
+    size: ${NOTIFICATIONS_TOP_SIZE:10}
 
 words:
   wordsAtTheMoment: ${WORDS_AT_THE_MOMENT:12}

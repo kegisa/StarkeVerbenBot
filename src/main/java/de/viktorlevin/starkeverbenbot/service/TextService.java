@@ -58,8 +58,10 @@ public class TextService {
             """;
 
     private static final String NOTIFICATION_INACTIVITY = """
-            Привет! 👋
-            Не забывай про регулярность — 5 минут в день помогут тебе быстрее выучить новые слова. Успех близко! 💪
+            %s
+                        
+            Помнишь перевод этого слова? 🧐
+            Не забывай про регулярность — 5 минут в день помогут тебе быстрее выучить новые слова.  📚 Успех близко! 💪
             """;
     private static final String TOP_RATING_MESSAGE = """
             🎉 Вы входите в топ %d пользователей бота по выученным словам и глаголам!
@@ -150,8 +152,21 @@ public class TextService {
         return messageService.createMessage(chatId, MESSAGE_FOR_GROUP);
     }
 
-    public SendMessage createActivityNotification(Long chatId) {
-        return createMessage(chatId, NOTIFICATION_INACTIVITY);
+    public SendMessage createActivityNotification(Long chatId, Wort word) {
+        String wordText = WORT_AND_TRANSLATION.formatted(word.getWord(), word.getTranslation());
+        String textResponse = NOTIFICATION_INACTIVITY.formatted(wordText);
+        int delimeter = textResponse.indexOf('\n');
+
+        return messageService.createMessageWithEntites(chatId, textResponse, List.of(MessageEntity.builder()
+                        .type("bold")
+                        .offset(0)
+                        .length(delimeter)
+                        .build(),
+                MessageEntity.builder()
+                        .type("spoiler")
+                        .offset(delimeter + 1)
+                        .length(word.getTranslation().length())
+                        .build()));
     }
 
     public SendMessage createTopNotification(Long chatId, long quantityOfVerbs, long quantityOfWords, int topSize) {

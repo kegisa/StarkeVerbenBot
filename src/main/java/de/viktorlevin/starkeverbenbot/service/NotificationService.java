@@ -3,6 +3,7 @@ package de.viktorlevin.starkeverbenbot.service;
 import de.viktorlevin.starkeverbenbot.bot.StarkeVerbenBot;
 import de.viktorlevin.starkeverbenbot.entity.BotUser;
 import de.viktorlevin.starkeverbenbot.entity.Notification;
+import de.viktorlevin.starkeverbenbot.entity.Wort;
 import de.viktorlevin.starkeverbenbot.repository.NotificationRepository;
 import de.viktorlevin.starkeverbenbot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,7 +78,8 @@ public class NotificationService {
     }
 
     private void sendAndSaveActiveNotification(BotUser user) {
-        SendMessage sendMessage = textService.createActivityNotification(user.getChatId());
+        Wort wort = wortService.getRandomWort(user);
+        SendMessage sendMessage = textService.createActivityNotification(user.getChatId(), wort);
         sendNotificationThroughBot(sendMessage, user, Notification.Type.ACTIVITY);
     }
 

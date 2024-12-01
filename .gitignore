@@ -40,3 +40,6 @@ out/
 *-local.yml
 docker-compose.yml
 *-secret.yaml
+
+### backups ###
+/pgdata

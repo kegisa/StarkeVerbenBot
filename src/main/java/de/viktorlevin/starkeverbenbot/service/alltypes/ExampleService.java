@@ -2,9 +2,7 @@ package de.viktorlevin.starkeverbenbot.service.alltypes;
 
 import de.viktorlevin.starkeverbenbot.client.ExamplesClient;
 import de.viktorlevin.starkeverbenbot.dto.ExamplesDto;
-import de.viktorlevin.starkeverbenbot.service.StarkeVerbenService;
-import de.viktorlevin.starkeverbenbot.service.TextService;
-import de.viktorlevin.starkeverbenbot.service.WortService;
+import de.viktorlevin.starkeverbenbot.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,8 @@ public class ExampleService {
     private final WortService wortService;
     private final StarkeVerbenService starkeVerbenService;
     private final TextService textService;
+    private final StatisticService statisticService;
+    private final UserService userService;
 
     public List<BotApiMethod> getExample(CallbackQuery callbackQuery) {
         Long chatId = callbackQuery.getMessage().getChatId();
@@ -28,6 +28,8 @@ public class ExampleService {
         String data = callbackQuery.getData();
         log.info("Got CallbackExample message {} from {} with username {}",
                 data, chatId, username);
+        statisticService.saveRequestToStatistic(userService.registrateUser(chatId, username), callbackQuery.getData());
+
         try {
             ExamplesDto example = examplesClient.getExample(extractWord(data));
             return List.of(textService.messageWithExample(example, chatId));

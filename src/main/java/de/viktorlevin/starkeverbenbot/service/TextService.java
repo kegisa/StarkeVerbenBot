@@ -1,5 +1,6 @@
 package de.viktorlevin.starkeverbenbot.service;
 
+import de.viktorlevin.starkeverbenbot.dto.ExamplesDto;
 import de.viktorlevin.starkeverbenbot.entity.StarkesVerb;
 import de.viktorlevin.starkeverbenbot.entity.UserStatistic;
 import de.viktorlevin.starkeverbenbot.entity.Wort;
@@ -78,6 +79,14 @@ public class TextService {
             💪 Всего сильных глаголов выучено: %d из 172.
             🤖 Запросов в бот всего %d
             🚀 Не останавливайтесь на достигнутом! Вы на правильном пути к совершенству!
+            """;
+
+    private static final String EXAMPLE_MESSAGE = """
+            %s
+                        
+            %s
+                        
+            - Из %s "%s"
             """;
 
     public SendMessage startBot(Long chatId) {
@@ -178,6 +187,45 @@ public class TextService {
                 STATISTIC_MESSAGE.formatted(statistic.getLearnedWords(),
                         statistic.getLearnedStarkesVerbs(),
                         statistic.getRequests()));
+    }
+
+    public BotApiMethod messageWithExample(ExamplesDto example, Long chatId) {
+        String germanText = example.getSrc();
+        String russianText = example.getDst();
+
+        int offsetGerman = germanText.indexOf("<");
+        int germanLength = (germanText.indexOf(">") - offsetGerman) - 1;
+        germanText = germanText.replaceAll("[<>]", "");
+
+        int offsetRussianInRussian = russianText.indexOf("<");
+        int offsetRussianInCommon = offsetRussianInRussian + germanText.length() + 2;
+
+        int russianLength = (russianText.indexOf(">") - offsetRussianInRussian) - 1;
+
+
+        russianText = russianText.replaceAll("[<>]", "");
+
+        String refType = "movie".equals(example.getRef().getType()) ? "фильма"
+                : "series".equals(example.getRef().getType()) ? "сериала" : "";
+
+        return messageService.createMessageWithEntites(
+                chatId,
+                EXAMPLE_MESSAGE.formatted(germanText, russianText, refType, example.getRef().getTitle()),
+                List.of(MessageEntity.builder()
+                                .type("underline")
+                                .offset(offsetGerman)
+                                .length(germanLength)
+                                .build(),
+                        MessageEntity.builder()
+                                .type("underline")
+                                .offset(offsetRussianInCommon)
+                                .length(russianLength)
+                                .build(),
+                        MessageEntity.builder()
+                                .type("italic")
+                                .offset(germanText.length() + russianText.length() + 2)
+                                .length(example.getRef().getTitle().length() + refType.length() + 10)
+                                .build()));
     }
 }
 

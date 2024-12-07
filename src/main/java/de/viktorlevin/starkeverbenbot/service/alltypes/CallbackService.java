@@ -43,10 +43,12 @@ public class CallbackService {
                 callbackResponse = textService.markedVerbAsLearned(chatId);
             }
 
+
             var deleteKeybord = messageService.createEditMessageReplyMarkup(chatId, messageId);
 
             return List.of(deleteKeybord, callbackResponse);
-        } catch (Exception exception) {
+        } catch (
+                Exception exception) {
             log.error(exception.toString());
             return List.of(textService.createMessage(chatId, exception.getMessage()));
         }

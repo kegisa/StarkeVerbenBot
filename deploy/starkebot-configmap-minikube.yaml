@@ -7,3 +7,4 @@ data:
   WORDS_AT_THE_MOMENT: 12
   VERBS_AT_THE_MOMENT: 12
   VOICE_DOWNLOADER_URL: voice-downloader-service
+  EXAMPLES_URL: voice-downloader-service

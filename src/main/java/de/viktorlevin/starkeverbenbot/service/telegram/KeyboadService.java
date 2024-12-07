@@ -42,9 +42,12 @@ public class KeyboadService {
         InlineKeyboardButton voiceButton = InlineKeyboardButton.builder()
                 .text("Озвучить \uD83D\uDD0A")
                 .callbackData(templateCallbackData.formatted("voiceWord", Integer.toString(wordId))).build();
+        InlineKeyboardButton exampleButton = InlineKeyboardButton.builder()
+                .text("Пример использования \uD83D\uDCDD")
+                .callbackData(templateCallbackData.formatted("exampleWord", Integer.toString(wordId))).build();
 
         wordMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
-                .keyboard(List.of(List.of(markButton), List.of(voiceButton)))
+                .keyboard(List.of(List.of(voiceButton), List.of(exampleButton), List.of(markButton)))
                 .build());
         return wordMessage;
     }
@@ -56,9 +59,12 @@ public class KeyboadService {
         InlineKeyboardButton voiceButton = InlineKeyboardButton.builder()
                 .text("Озвучить \uD83D\uDD0A")
                 .callbackData(templateCallbackData.formatted("voiceVerb", Integer.toString(verbId))).build();
+        InlineKeyboardButton exampleButton = InlineKeyboardButton.builder()
+                .text("Пример использования \uD83D\uDCDD")
+                .callbackData(templateCallbackData.formatted("exampleVerb", Integer.toString(verbId))).build();
 
         verbMessage.setReplyMarkup(InlineKeyboardMarkup.builder()
-                .keyboard(List.of(List.of(markButton), List.of(voiceButton)))
+                .keyboard(List.of(List.of(voiceButton), List.of(exampleButton), List.of(markButton)))
                 .build());
         return verbMessage;
     }

@@ -2,10 +2,7 @@ package de.viktorlevin.starkeverbenbot.bot;
 
 import de.viktorlevin.starkeverbenbot.configuration.BotConfig;
 import de.viktorlevin.starkeverbenbot.service.TextService;
-import de.viktorlevin.starkeverbenbot.service.alltypes.CallbackService;
-import de.viktorlevin.starkeverbenbot.service.alltypes.ChatService;
-import de.viktorlevin.starkeverbenbot.service.alltypes.TextMessageService;
-import de.viktorlevin.starkeverbenbot.service.alltypes.VoiceMessageService;
+import de.viktorlevin.starkeverbenbot.service.alltypes.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,10 +23,11 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
     private final TextMessageService textMessageService;
     private final VoiceMessageService voiceMessageService;
     private final ChatService chatService;
+    private final ExampleService exampleService;
 
     public StarkeVerbenBot(BotConfig config, TextService textService, CallbackService callbackService,
                            TextMessageService textMessageService, VoiceMessageService voiceMessageService,
-                           ChatService chatService) {
+                           ChatService chatService, ExampleService exampleService) {
         super(config.getToken());
         this.config = config;
         this.textService = textService;
@@ -37,6 +35,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         this.textMessageService = textMessageService;
         this.voiceMessageService = voiceMessageService;
         this.chatService = chatService;
+        this.exampleService = exampleService;
     }
 
     @Override
@@ -61,6 +60,14 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery() && update.getCallbackQuery().getData().contains("voice")) {
             try {
                 sendVoiceMessage(voiceMessageService.processVoiceCallback(update.getCallbackQuery()));
+            } catch (Exception exception) {
+                sendApiMethodToUser(List.of(textService.createMessage(
+                        update.getCallbackQuery().getMessage().getChatId(),
+                        exception.getMessage())));
+            }
+        } else if (update.hasCallbackQuery() && update.getCallbackQuery().getData().contains("example")) {
+            try {
+                sendApiMethodToUser(exampleService.getExample(update.getCallbackQuery()));
             } catch (Exception exception) {
                 sendApiMethodToUser(List.of(textService.createMessage(
                         update.getCallbackQuery().getMessage().getChatId(),

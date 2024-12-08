@@ -222,6 +222,16 @@ public class TextService {
                                 .length(russianLength)
                                 .build(),
                         MessageEntity.builder()
+                                .type("bold")
+                                .offset(offsetGerman)
+                                .length(germanLength)
+                                .build(),
+                        MessageEntity.builder()
+                                .type("bold")
+                                .offset(offsetRussianInCommon)
+                                .length(russianLength)
+                                .build(),
+                        MessageEntity.builder()
                                 .type("italic")
                                 .offset(germanText.length() + russianText.length() + 2)
                                 .length(example.getRef().getTitle().length() + refType.length() + 10)

@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.ChatMemberUpdated;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 
 import java.util.List;
 
@@ -25,16 +26,19 @@ public class ChatService {
     private final BotConfig botConfig;
 
     public List<BotApiMethod> processChatMemberMessage(ChatMemberUpdated myChatMember) {
-        if (isOldStatus(myChatMember, "left") && isNewStatus(myChatMember, "member")) {
+        if (isNewStatus(myChatMember, "member")) {
+            log.info("Our bot was added to chat {}", myChatMember.getChat().getId());
             return List.of(keyboadService.addKeyBoardMarkup(
                     (SendMessage) textService.createMessageForGroup(myChatMember.getChat().getId())));
+        } else if (isNewStatus(myChatMember, "administrator") && isOurBot(myChatMember.getNewChatMember())) {
+            log.info("Our bot was promoted to admin");
+            return List.of();
+        } else if (isNewStatus(myChatMember, "left") && isOurBot(myChatMember.getNewChatMember())) {
+            log.error("Our bot was kicked from chat {}", myChatMember.getChat().getId());
+            return List.of();
         } else {
             throw new RuntimeException("Какие то действия в чате, которые я не могу обработать...");
         }
-    }
-
-    private boolean isOldStatus(ChatMemberUpdated myChatMember, String status) {
-        return myChatMember.getOldChatMember().getStatus().equals(status);
     }
 
     private boolean isNewStatus(ChatMemberUpdated myChatMember, String status) {
@@ -42,11 +46,11 @@ public class ChatService {
     }
 
     public void oneMemberLeft(Message message) {
-        User user = message.getLeftChatMember();
-        if (isOurBotWasKicked(user)) {
-            log.info("Bot was kicked from chat {} by {}", message.getChat().getId(), message.getFrom().getUserName());
+        if (botConfig.getBotName().equals(message.getLeftChatMember().getUserName())) {
             return;
         }
+
+        User user = message.getLeftChatMember();
 
         log.info("Member with id {}, userName {}, name {}, lastName {} left", user.getId(), user.getUserName(), user.getFirstName(), user.getLastName());
         userService.findByChatId(user.getId()).ifPresentOrElse(
@@ -54,7 +58,7 @@ public class ChatService {
                 () -> log.info("User with id {} is NOT using Bot separately", user.getId()));
     }
 
-    private boolean isOurBotWasKicked(User user) {
-        return user.getIsBot() && botConfig.getBotName().equals(user.getUserName());
+    private boolean isOurBot(ChatMember chatMember) {
+        return botConfig.getBotName().equals(chatMember.getUser().getUserName());
     }
 }

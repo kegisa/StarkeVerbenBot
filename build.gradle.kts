@@ -30,6 +30,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.liquibase:liquibase-core:4.20.0")
     implementation("org.telegram:telegrambots:6.9.7.1");
+    implementation("org.apache.commons:commons-math3:3.6.1");
 
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")

@@ -7,13 +7,13 @@ import de.viktorlevin.starkeverbenbot.repository.LearnedStarkeVerbenRepository;
 import de.viktorlevin.starkeverbenbot.repository.StarkesVerbRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.random.RandomDataGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -22,10 +22,10 @@ public class StarkeVerbenService {
     private final StarkesVerbRepository starkesVerbRepository;
     private final LearnedStarkeVerbenRepository learnedStarkeVerbenRepository;
     private final UserService userService;
+    private final RandomDataGenerator random;
 
     @Value("${verbs.verbsAtTheMoment}")
     private Long verbsAtTheMoment;
-    private final Random random = new Random();
 
     @Transactional
     public StarkesVerb getRandomStarkesVerb(BotUser user) {
@@ -43,7 +43,8 @@ public class StarkeVerbenService {
     }
 
     private StarkesVerb getRandomVerbFromList(List<LearnedStarkesVerb> verbs) {
-        return verbs.get(random.nextInt(verbs.size())).getVerb();
+        int i = random.nextInt(0, verbs.size() - 1);
+        return verbs.get(i).getVerb();
     }
 
     @Transactional

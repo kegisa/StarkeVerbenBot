@@ -19,7 +19,8 @@ import java.util.Random;
 public class TextService {
 
     private final MessageService messageService;
-    private static final Random random = new Random();
+    private final Random defaultRandom;
+
     private final String BEKOMMEN_HELP = """
             Бот поможет тебе выучить 1080 самых популярных немецких слов и 172 сильных глагола.
             Жмите кнопку “Убрать слово! Я запомнил” только когда уверены, что запомнили слово.
@@ -142,7 +143,7 @@ public class TextService {
     }
 
     private String getRandomCombination(String deutschWort, String translation) {
-        if (random.nextBoolean()) {
+        if (defaultRandom.nextBoolean()) {
             return WORT_AND_TRANSLATION.formatted(deutschWort, translation);
         } else {
             return WORT_AND_TRANSLATION.formatted(translation, deutschWort);

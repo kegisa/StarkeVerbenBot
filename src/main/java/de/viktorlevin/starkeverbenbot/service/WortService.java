@@ -7,13 +7,13 @@ import de.viktorlevin.starkeverbenbot.repository.LearnedWordsRepository;
 import de.viktorlevin.starkeverbenbot.repository.WortRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.random.RandomDataGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -22,10 +22,11 @@ public class WortService {
     private final WortRepository wortRepository;
     private final LearnedWordsRepository learnedWordsRepository;
     private final UserService userService;
+    private final RandomDataGenerator random;
 
     @Value("${words.wordsAtTheMoment}")
     private Long wordsAtTheMoment;
-    private final Random random = new Random();
+
 
     @Transactional
     public Wort getRandomWort(BotUser user) {
@@ -43,7 +44,8 @@ public class WortService {
     }
 
     private Wort getRandomWortFromList(List<LearnedWort> words) {
-        return words.get(random.nextInt(words.size())).getWort();
+        int i = random.nextInt(0, words.size() - 1);
+        return words.get(i).getWort();
     }
 
     @Transactional

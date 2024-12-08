@@ -55,8 +55,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
 
     private void routeUpdate(Update update) {
         if (update.hasMessage() && isTextMessage(update)) {
-            sendApiMethodToUser(List.of(
-                    textMessageService.processTextMessage(update.getMessage())));
+            sendApiMethodToUser(textMessageService.processTextMessage(update.getMessage()));
         } else if (update.hasCallbackQuery() && update.getCallbackQuery().getData().contains("voice")) {
             try {
                 sendVoiceMessage(voiceMessageService.processVoiceCallback(update.getCallbackQuery()));

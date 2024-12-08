@@ -9,8 +9,11 @@ import de.viktorlevin.starkeverbenbot.service.telegram.KeyboadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -23,7 +26,7 @@ public class TextMessageService {
     private final TextService textService;
     private final KeyboadService keyboadService;
 
-    public SendMessage processTextMessage(Message message) {
+    public List<BotApiMethod> processTextMessage(Message message) {
         try {
             String userName = message.getChat().getUserName();
             Long chatId = message.getChat().getId();
@@ -35,29 +38,30 @@ public class TextMessageService {
 
             log.info("Text is {}", messageText);
 
-            switch (messageText) {
-                case "/start":
-                    wortService.initializeLearningProcess(user);
-                    starkeVerbenService.initializeLearningProcess(user);
-                    SendMessage startMessage = textService.startBot(chatId);
-                    return keyboadService.addKeyBoardMarkup(startMessage);
-                case "/einverb", "ein starkes Verb bitte", "/einVerb":
-                    StarkesVerb starkesVerb = starkeVerbenService.getRandomStarkesVerb(user);
-                    SendMessage verbMessage = textService.generateStarkesVerb(starkesVerb, chatId);
-                    return keyboadService.addInlineKeyBoardForVerb(verbMessage, starkesVerb.getId());
-                case "/einwort", "ein Wort bitte", "/einWort":
-                    Wort wort = wortService.getRandomWort(user);
-                    SendMessage wordMessage = textService.generateWort(wort, chatId);
-                    return keyboadService.addInlineKeyBoardForWord(wordMessage, wort.getId());
-                case "/statistic":
-                    UserStatistic statistic = statisticService.getUserStatistic(user);
-                    return textService.statisticMessage(statistic);
-                default:
-                    throw new IllegalStateException("Я не понимаю, что мне делать...");
+            if (messageText.contains("/start")) {
+                wortService.initializeLearningProcess(user);
+                starkeVerbenService.initializeLearningProcess(user);
+                SendMessage startMessage = textService.startBot(chatId);
+                return List.of(keyboadService.addKeyBoardMarkup(startMessage));
+            } else if (messageText.contains("/einverb") || messageText.contains("ein starkes Verb bitte") || messageText.contains("/einVerb")) {
+                StarkesVerb starkesVerb = starkeVerbenService.getRandomStarkesVerb(user);
+                SendMessage verbMessage = textService.generateStarkesVerb(starkesVerb, chatId);
+                return List.of(keyboadService.addInlineKeyBoardForVerb(verbMessage, starkesVerb.getId()));
+            } else if (messageText.contains("/einwort") || messageText.contains("ein Wort bitte") || messageText.contains("/einWort")) {
+                Wort wort = wortService.getRandomWort(user);
+                SendMessage wordMessage = textService.generateWort(wort, chatId);
+                return List.of(keyboadService.addInlineKeyBoardForWord(wordMessage, wort.getId()));
+            } else if (messageText.contains("/statistic")) {
+                UserStatistic statistic = statisticService.getUserStatistic(user);
+                return List.of(textService.statisticMessage(statistic));
+            } else if (messageText.contains("@")) {
+                return List.of();
+            } else {
+                throw new IllegalStateException("Я не понимаю, что мне делать...");
             }
         } catch (Exception exception) {
             log.error(exception.toString());
-            return textService.createMessage(message.getChat().getId(), exception.getMessage());
+            return List.of(textService.createMessage(message.getChat().getId(), exception.getMessage()));
         }
     }
 

@@ -57,7 +57,7 @@ public class TextMessageService {
             } else if (messageText.contains("@")) {
                 return List.of();
             } else {
-                if ("group".equals(message.getChat().getType())) {
+                if (message.getChat().getType().contains("group")) {
                     return List.of();
                 }
                 throw new IllegalStateException("Я не понимаю, что мне делать...");

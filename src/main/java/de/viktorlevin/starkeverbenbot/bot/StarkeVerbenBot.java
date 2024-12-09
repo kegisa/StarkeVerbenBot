@@ -79,7 +79,7 @@ public class StarkeVerbenBot extends TelegramLongPollingBot {
         } else if (update.hasMessage() && update.getMessage().getLeftChatMember() != null) {
             chatService.oneMemberLeft(update.getMessage());
         } else {
-            if (update.hasMessage() && "group".equals(update.getMessage().getChat().getType())) {
+            if (update.hasMessage() && update.getMessage().getChat().getType().contains("group")) {
                 return;
             }
             log.error("Could not process this message {}", update);

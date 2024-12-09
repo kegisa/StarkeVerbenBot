@@ -33,7 +33,7 @@ public class ChatService {
         } else if (isNewStatus(myChatMember, "administrator") && isOurBot(myChatMember.getNewChatMember())) {
             log.info("Our bot was promoted to admin");
             return List.of();
-        } else if (isNewStatus(myChatMember, "left") && isOurBot(myChatMember.getNewChatMember())) {
+        } else if ((isNewStatus(myChatMember, "left") || isNewStatus(myChatMember, "kicked")) && isOurBot(myChatMember.getNewChatMember())) {
             log.error("Our bot was kicked from chat {}", myChatMember.getChat().getId());
             return List.of();
         } else {
@@ -43,6 +43,10 @@ public class ChatService {
 
     private boolean isNewStatus(ChatMemberUpdated myChatMember, String status) {
         return myChatMember.getNewChatMember().getStatus().equals(status);
+    }
+
+    private boolean isOldStatus(ChatMemberUpdated myChatMember, String status) {
+        return myChatMember.getOldChatMember().getStatus().equals(status);
     }
 
     public void oneMemberLeft(Message message) {

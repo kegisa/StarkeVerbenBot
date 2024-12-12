@@ -36,7 +36,9 @@ public class StarkeVerbenService {
                 initializeLearningProcess(user);
                 return getRandomVerbFromList(learnedStarkeVerbenRepository.findAllByUserAndStatus(user, LearnedStarkesVerb.Status.IN_PROGRESS));
             }
-            throw new IllegalStateException("Вы выучили все сильные глаголы из списка!\uD83C\uDFC6  Таких пользователей очень мало, поздравляю!\uD83C\uDF89");
+            Long countFinished = learnedStarkeVerbenRepository.usersFinished();
+            log.info("User {} finished with starke verben", user.getChatId());
+            throw new IllegalStateException("Вы выучили все сильные глаголы из списка!\uD83C\uDFC6  Таких пользователей всего %s, поздравляю!\uD83C\uDF89".formatted(String.valueOf(countFinished)));
         } else {
             return getRandomVerbFromList(verbsInProcess);
         }

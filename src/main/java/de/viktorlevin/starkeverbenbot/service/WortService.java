@@ -37,7 +37,9 @@ public class WortService {
                 initializeLearningProcess(user);
                 return getRandomWortFromList(learnedWordsRepository.findAllByUserAndStatus(user, LearnedWort.Status.IN_PROGRESS));
             }
-            throw new IllegalStateException("Вы выучили все слова из списка!\uD83C\uDFC6 Таких пользователей очень мало, поздравляю! \uD83C\uDF89 В ближайшее время я добавлю Вам еще 2000 слов в Ваш словарь\uD83D\uDCDA. Спасибо, что пользуетесь!\uD83D\uDD25");
+            log.info("User {} finished with worte", user.getChatId());
+            Long countFinished = learnedWordsRepository.usersFinished();
+            throw new IllegalStateException("Вы выучили все слова из списка!\uD83C\uDFC6 Таких пользователей всего %s, поздравляю! \uD83C\uDF89 Дайте мне немного времени, в ближайшее время я добавлю Вам еще 2000 слов в Ваш словарь\uD83D\uDCDA. Спасибо, что пользуетесь!\uD83D\uDD25".formatted(String.valueOf(countFinished)));
         } else {
             return getRandomWortFromList(wordsInProcess);
         }

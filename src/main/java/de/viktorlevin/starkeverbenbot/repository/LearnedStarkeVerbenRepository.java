@@ -24,5 +24,8 @@ public interface LearnedStarkeVerbenRepository extends JpaRepository<LearnedStar
 
     @EntityGraph(attributePaths = {"verb"})
     List<LearnedStarkesVerb> findAllByUserAndStatus(BotUser user, LearnedStarkesVerb.Status status);
+
+    @Query(value = "select count(*) from (select count(*), user_id from learned_starke_verben where status = 1 group by user_id having (count(*) = 172)) sub;", nativeQuery = true)
+    Long usersFinished();
 }
 

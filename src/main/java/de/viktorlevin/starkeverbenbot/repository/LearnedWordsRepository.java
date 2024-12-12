@@ -23,5 +23,8 @@ public interface LearnedWordsRepository extends JpaRepository<LearnedWort, Integ
 
     @EntityGraph(attributePaths = {"wort"})
     List<LearnedWort> findAllByUserAndStatus(BotUser user, LearnedWort.Status status);
+
+    @Query(value = "select count(*) from (select count(*), user_id from learned_words where status = 1 group by user_id having (count(*) = 1080)) sub;", nativeQuery = true)
+    Long usersFinished();
 }
 

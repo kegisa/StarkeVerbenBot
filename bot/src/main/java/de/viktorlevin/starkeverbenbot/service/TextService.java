@@ -86,6 +86,12 @@ public class TextService {
             🚀 Не останавливайтесь на достигнутом! Вы на правильном пути к совершенству!
             """;
 
+    private static final String DONATE_MESSAGE = """         
+            💖 Бот помогает тебе учиться, поддержи его развите!:
+             🌍/🇺🇦 PayPal https://www.paypal.me/kegisa
+             🇷🇺 Переводом на карту Sber 4276540022894061 
+             """;
+
     private static final String EXAMPLE_MESSAGE = """
             %s
                         
@@ -192,6 +198,10 @@ public class TextService {
                 STATISTIC_MESSAGE.formatted(statistic.getLearnedWords(),
                         statistic.getLearnedStarkesVerbs(),
                         statistic.getRequests()));
+    }
+
+    public SendMessage donateMessage(Long chatId) {
+        return createMessage(chatId, DONATE_MESSAGE);
     }
 
     public BotApiMethod messageWithExample(ExamplesDto example, Long chatId) {

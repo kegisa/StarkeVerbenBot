@@ -54,7 +54,10 @@ public class TextMessageService {
             } else if (messageText.contains("/statistic")) {
                 UserStatistic statistic = statisticService.getUserStatistic(user);
                 return List.of(textService.statisticMessage(statistic));
-            } else if (messageText.contains("@")) {
+            } else if (messageText.contains("/donate")) {
+                return List.of(textService.donateMessage(chatId));
+            }
+            else if (messageText.contains("@")) {
                 return List.of();
             } else {
                 if (message.getChat().getType().contains("group")) {

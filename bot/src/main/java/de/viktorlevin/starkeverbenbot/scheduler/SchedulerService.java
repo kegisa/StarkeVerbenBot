@@ -26,11 +26,11 @@ public class SchedulerService {
 
     @Scheduled(cron = "${notifications.cron}")
     public void sendNotificationAboutActivity() {
-        log.info("Getting users for sending activity notifications");
+        log.debug("Getting users for sending activity notifications");
         List<BotUser> users = notificationService.getUsersWithoutActivity(millsWithoutActivity);
-        log.info("{} users were received for activity notifications", users.size());
+        log.debug("{} users were received for activity notifications", users.size());
         notificationService.sendActivityNotifications(users);
-        log.info("Notifications were successfully sent");
+        log.debug("Notifications were successfully sent");
     }
 
     @Scheduled(cron = "${notifications.top.cron}")

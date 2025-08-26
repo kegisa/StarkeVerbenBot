@@ -43,7 +43,7 @@ public class NotificationService {
 
     @Transactional
     public void sendTopNotifications(List<BotUser> users, int topsize, int nHours) {
-        log.info("Started process for sending top notifications to {} users", users.size());
+        log.debug("Started process for sending top notifications to {} users", users.size());
         users.forEach(user -> sendTopNotification(user, topsize, nHours));
     }
 
@@ -85,7 +85,7 @@ public class NotificationService {
 
     @Transactional(readOnly = true)
     public List<BotUser> getTopActiveUsersForLastNHours(int topSize, int lastHours) {
-        log.info("Getting top {} active users", topSize);
+        log.debug("Getting top {} active users", topSize);
         return userRepository.getTopActiveUsers(topSize, lastHours);
     }
 
